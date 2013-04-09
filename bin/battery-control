@@ -1,0 +1,56 @@
+#! /usr/bin/env python
+# -*- Python -*-
+
+####################################################################################################
+# 
+# - 
+# Copyright (C) 2013 
+# 
+####################################################################################################
+
+####################################################################################################
+#
+# Logging
+#
+
+import LaptopControlPanel.Logging.Logging as Logging
+
+logger = Logging.setup_logging('battery-control')
+
+####################################################################################################
+
+import argparse
+
+####################################################################################################
+
+from LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl import BatteryControl
+
+####################################################################################################
+#
+# Options
+#
+
+argument_parser = argparse.ArgumentParser(description='...')
+
+args = argument_parser.parse_args()
+
+####################################################################################################
+
+battery_control = BatteryControl()
+
+# battery_control.set_start_threshold(battery_control.main_battery, threshold=40)
+# battery_control.set_stop_threshold(battery_control.main_battery, threshold=80)
+battery_control.get_start_threshold(battery_control.main_battery)
+battery_control.get_stop_threshold(battery_control.main_battery)
+
+battery_control.get_force_discharge(battery_control.main_battery)
+battery_control.get_peak_shift_state()
+# battery_control.set_force_discharge(force_discharge=False)
+# battery_control.get_force_discharge(battery_control.main_battery)
+# battery_control.get_peak_shift_state()
+
+####################################################################################################
+# 
+# End
+# 
+####################################################################################################
