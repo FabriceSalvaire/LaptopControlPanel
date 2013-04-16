@@ -5,6 +5,18 @@
 # 
 ###################################################################################################
 
+""" This module provides an interface to ACPI Calls to control Thinkpad Laptop Battery.
+
+These ACPI calls permits:
+* to set the start and stop capacity threshold to charge the battery,
+* to switch on battery when AC power is plugged,
+* to setup a "peak shift" procedure.
+
+(As far I know) The concept of "peak shift" is to switch temporarily electrical devices on battery
+during a power peak consumption period so as to unload the grid.  This power management strategy is
+relevant for country like Japan, where these peak periods represent a risk of electrical black out.
+"""
+
 ####################################################################################################
 
 from LaptopControlPanel.Acpi.AcpiCall import AcpiCallDevice, AcpiCallArguments
@@ -81,7 +93,7 @@ class BatteryControl(object):
             input_arguments=AcpiCallArguments(battery_id=7,
                                               reserved=31,
                                               ),
-            output_arguments=AcpiCallArguments(start_treshold=7,
+            output_arguments=AcpiCallArguments(start_threshold=7,
                                                capability=8,
                                                can_specify_every_battery=9,
                                                reserved=30,
@@ -157,9 +169,9 @@ class BatteryControl(object):
 
     ##############################################
 
-    def _check_battery_id_for_reading(self, battery_id):
+    def _check_battery_id_for_reading(self, battery):
 
-        if battery_id == self.either_both_battery:
+        if battery == self.either_both_battery:
             raise ValueError("Can't specify either or both battery for reading.")
 
     ##############################################
@@ -169,7 +181,7 @@ class BatteryControl(object):
         if threshold is None:
             threshold = 0
         elif not (1 <= threshold <= 99):
-            raise ValueError("Wrong charge treshold value " + str(threshold))
+            raise ValueError("Wrong charge threshold value " + str(threshold))
         return threshold
 
     ##############################################
@@ -181,35 +193,35 @@ class BatteryControl(object):
 
     ##############################################
 
-    def set_start_threshold(self, battery_id=main_battery, threshold=None):
+    def set_start_threshold(self, battery=main_battery, threshold=None):
 
         threshold = self._check_charge_threshold(threshold)
-        result = self._set_charge_start_threshold_acpi_call.call(battery_id=battery_id,
+        result = self._set_charge_start_threshold_acpi_call.call(battery_id=battery,
                                                                  charge_start_capacity=threshold,
                                                                  )
         self._check_error_status(result)
 
     ##############################################
 
-    def set_stop_threshold(self, battery_id=main_battery, threshold=None):
+    def set_stop_threshold(self, battery=main_battery, threshold=None):
 
         threshold = self._check_charge_threshold(threshold)
-        result = self._set_charge_stop_threshold_acpi_call.call(battery_id=battery_id,
+        result = self._set_charge_stop_threshold_acpi_call.call(battery_id=battery,
                                                                 charge_stop_capacity=threshold,
                                                                 )
         self._check_error_status(result)
 
     ##############################################
 
-    def get_start_threshold(self, battery_id=main_battery):
-        self._check_battery_id_for_reading(battery_id)
-        return self._get_charge_start_threshold_acpi_call.call(battery_id=battery_id)
+    def get_start_threshold(self, battery=main_battery):
+        self._check_battery_id_for_reading(battery)
+        return self._get_charge_start_threshold_acpi_call.call(battery_id=battery)
 
     ##############################################
 
-    def get_stop_threshold(self, battery_id=main_battery):
-        self._check_battery_id_for_reading(battery_id)
-        return self._get_charge_stop_threshold_acpi_call.call(battery_id=battery_id)
+    def get_stop_threshold(self, battery=main_battery):
+        self._check_battery_id_for_reading(battery)
+        return self._get_charge_stop_threshold_acpi_call.call(battery_id=battery)
     
     ##############################################
 
@@ -221,8 +233,8 @@ class BatteryControl(object):
 
     ##############################################
 
-    def set_force_discharge(self, battery_id=main_battery, force_discharge=True, break_by_ac_detaching=False):
-        result = self._set_discharge_state_acpi_call.call(battery_id=battery_id,
+    def set_force_discharge(self, battery=main_battery, force_discharge=True, break_by_ac_detaching=False):
+        result = self._set_discharge_state_acpi_call.call(battery_id=battery,
                                                           force_discharge=force_discharge,
                                                           break_by_ac_detaching=break_by_ac_detaching,
                                                           )
@@ -230,9 +242,9 @@ class BatteryControl(object):
 
     ##############################################       
 
-    def get_force_discharge(self, battery_id=main_battery):
-        self._check_battery_id_for_reading(battery_id)
-        return self._get_discharge_state_acpi_call.call(battery_id=battery_id)
+    def get_force_discharge(self, battery=main_battery):
+        self._check_battery_id_for_reading(battery)
+        return self._get_discharge_state_acpi_call.call(battery_id=battery)
 
     ##############################################
 

@@ -1,6 +1,6 @@
 ####################################################################################################
 # 
-# - 
+# LaptopControlPanel - 
 # Copyright (C) 2013 
 # 
 ####################################################################################################
@@ -44,7 +44,8 @@ class AcpiCallDevice(object):
 
         # kernel_version = subprocess.check_outpout(['/bin/uname', '-r'])
         # module_path = os.path.join('lib', 'modules', kernel_version, 'extra', 'acpi_call.ko')
-        rc = subprocess.check_call(['/sbin/insmod', 'acpi_call'])
+        self._logger.debug("Load module acpi_call")
+        rc = subprocess.check_call(['/sbin/modprobe', 'acpi_call'])
         if rc:
             raise NameError("Cannot load module acpi_call")
 

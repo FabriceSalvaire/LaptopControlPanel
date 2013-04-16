@@ -3,7 +3,7 @@
 
 ####################################################################################################
 # 
-# - 
+# LaptopControlPanel - 
 # Copyright (C) 2013 
 # 
 ####################################################################################################
@@ -26,28 +26,90 @@ import argparse
 from LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl import BatteryControl
 
 ####################################################################################################
+
+battery_control = BatteryControl()
+
+####################################################################################################
+
+def set_threshold(args):
+    battery_control.set_start_threshold(battery=args.battery, threshold=args.start)
+    battery_control.set_stop_threshold(battery=args.battery, threshold=args.stop)
+
+####################################################################################################
+
+def get_threshold(args):
+    start = battery_control.get_start_threshold(battery=args.battery)
+    stop = battery_control.get_stop_threshold(battery=args.battery)
+    print "Battery charge threshold [start, stop] range is set to [%u, %u] %%" % (
+        start.start_threshold, stop.stop_threshold)
+
+####################################################################################################
+
+def force_discharge(args):
+    battery_control.set_force_discharge(force_discharge=args.force_discharge)
+
+####################################################################################################
+
+class BatteryArgumentAction(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        if values == 'main':
+            value = battery_control.main_battery
+        elif values == 'secondary':
+            value = battery_control.secondary_battery
+        elif values == 'both':
+            value = battery_control.either_both_battery
+        print namespace, self.dest, value
+        setattr(namespace, self.dest, value)
+
+####################################################################################################
+
+class StatusAction(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        value = values in ('on', 'true')
+        setattr(namespace, self.dest, value)
+
+####################################################################################################
 #
 # Options
 #
 
-argument_parser = argparse.ArgumentParser(description='...')
+argument_parser = argparse.ArgumentParser(description='Thinkpad Battery Control',
+                                          epilog="To get the subcommand help use 'subcommand --help'",
+                                          formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+argument_parser.add_argument('--battery',
+                             default='main',
+                             choices=['main', 'secondary', 'both'],
+                             action=BatteryArgumentAction,
+                             help='Select Battery')
+
+subparsers = argument_parser.add_subparsers(title='Subcommands are')
+
+argument_parser_set_threshold = subparsers.add_parser('set-threshold',
+                                                      help='Set charge threshold',
+                                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+argument_parser_set_threshold.add_argument('--start',
+                                           default=40,
+                                           help='Start threshold')
+argument_parser_set_threshold.add_argument('--stop',
+                                           default=80,
+                                           help='Stop threshold')
+argument_parser_set_threshold.set_defaults(func=set_threshold)
+
+argument_parser_get_threshold = subparsers.add_parser('get-threshold',
+                                                      help='Get charge threshold')
+argument_parser_get_threshold.set_defaults(func=get_threshold)
+
+argument_parser_force_discharge = subparsers.add_parser('force-discharge',
+                                                        help='Force discharge')
+argument_parser_force_discharge.add_argument('status',
+                                             action=StatusAction,
+                                             choices=['on', 'off', 'true', 'false'],
+                                             help='Status')
+argument_parser_force_discharge.set_defaults(func=force_discharge)
 
 args = argument_parser.parse_args()
-
-####################################################################################################
-
-battery_control = BatteryControl()
-
-# battery_control.set_start_threshold(battery_control.main_battery, threshold=40)
-# battery_control.set_stop_threshold(battery_control.main_battery, threshold=80)
-battery_control.get_start_threshold(battery_control.main_battery)
-battery_control.get_stop_threshold(battery_control.main_battery)
-
-battery_control.get_force_discharge(battery_control.main_battery)
-battery_control.get_peak_shift_state()
-# battery_control.set_force_discharge(force_discharge=False)
-# battery_control.get_force_discharge(battery_control.main_battery)
-# battery_control.get_peak_shift_state()
+args.func(args)
 
 ####################################################################################################
 # 
