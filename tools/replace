@@ -3,8 +3,8 @@
 
 ####################################################################################################
 # 
-# LaptopControlPanel -.
-# Copyright (C) 2013 Salvaire Fabrice
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) 2012 Fabrice Salvaire
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,15 +23,19 @@
 
 ####################################################################################################
 
+import argparse
 import os
 import re
 import subprocess
 import sys
 
-from optparse import OptionParser
+####################################################################################################
+
+program_path = os.path.dirname(os.path.abspath(__file__))
 
 ####################################################################################################
 
+# Fixme: exclude -> include ?
 default_excluded_extension = ','.join(('~',
                                        '#',
                                        '.diff',
@@ -42,101 +46,90 @@ default_excluded_extension = ','.join(('~',
                                        '.txt',
                                        ))
 
-default_exclusion_pattern = '\.bzr'
+default_exclusion_pattern = '(\.bzr|\.git)'
+
+source_path = os.path.dirname(program_path)
 
 ####################################################################################################
 #
 # Options
 #
 
-usage = 'usage: %prog [options]'
+argument_parser = argparse.ArgumentParser(description='Replace patten')
 
-parser = OptionParser(usage)
+argument_parser.add_argument('--source-path',
+                             default=source_path,
+                             help='root path')
 
-parser.add_option('--root-tree-path',
-                   dest='root_tree_path',
-                   type='string', default='.',
-                   help='root path')
+argument_parser.add_argument('--exclude',
+                             dest='exclusion_pattern',
+                             default=default_exclusion_pattern,
+                             help='exclusion regexp [%s]' % (default_exclusion_pattern))
 
-parser.add_option('--exclude',
-                   dest='exclusion_pattern',
-                   type='string', default=default_exclusion_pattern,
-                   help='exclusion regexp [%s]' % (default_exclusion_pattern))
+argument_parser.add_argument('--exclude-extension',
+                             dest='excluded_extension',
+                             default=default_excluded_extension,
+                             help='exclude extension [%s]' % (default_excluded_extension))
 
-parser.add_option('--exclude-extension',
-                   dest='excluded_extension',
-                   type='string', default=default_excluded_extension,
-                   help='exclude extension [%s]' % (default_excluded_extension))
+argument_parser.add_argument('pattern', metavar='Pattern',
+                             help='pattern')
 
-parser.add_option('--pattern',
-                   dest='pattern',
-                   type='string', default=None,
-                   help='pattern')
+argument_parser.add_argument('new_pattern', metavar='NewPattern',
+                             nargs='?',
+                             help='new pattern')
 
-parser.add_option('--new-pattern',
-                   dest='new_pattern',
-                   type='string', default=None,
-                   help='new pattern')
-
-opt, args = parser.parse_args()
+args = argument_parser.parse_args()
 
 ####################################################################################################
 
 def to_absolute_path(path):
-
     return os.path.abspath(os.path.expanduser(path))
 
 ####################################################################################################
 
-program_path = os.path.dirname(os.path.abspath(__file__))
 perl_grep = os.path.join(program_path, 'perl-grep')
 
-root_tree_path = to_absolute_path(opt.root_tree_path)
+source_path = to_absolute_path(args.source_path)
+print 'Source path:', source_path, '\n'
 
-if opt.pattern is None:
-    sys.exit(1)
+excluded_extension = args.excluded_extension.split(',')
 
-excluded_extension = opt.excluded_extension.split(',')
-
-if opt.exclusion_pattern is not None:
-    exclude_re = re.compile(opt.exclusion_pattern)
+if args.exclusion_pattern is not None:
+    exclude_re = re.compile(args.exclusion_pattern)
 else:
     exclude_re = None
 
 ####################################################################################################
 
+def is_excluded(file_name):
+
+    for extension in excluded_extension:
+        if file_name.endswith(extension):
+            return True
+    else:
+        return exclude_re.search(absolut_file_name) is not None
+
+####################################################################################################
+
 def process_file(absolut_file_name):
 
-    return_code = subprocess.call([perl_grep, opt.pattern, absolut_file_name])
+    return_code = subprocess.call([perl_grep, args.pattern, absolut_file_name])
     if return_code == 0:
         print absolut_file_name
-        
-        if opt.new_pattern is not None:
+        # print absolut_file_name[len(source_path)+1:]
+        if args.new_pattern is not None:
             subprocess.call(['sed',
                              '--in-place=~',
-                             's/%s/%s/g' % (opt.pattern, opt.new_pattern),
+                             's/%s/%s/g' % (args.pattern, args.new_pattern),
                              absolut_file_name,
                              ])
 
 ####################################################################################################
 
-for root, dirs, files in os.walk(root_tree_path):
+for path, directories, files in os.walk(source_path):
     for file_name in files:
-
-        absolut_file_name = os.path.join(root, file_name)
-        
-        skipped = False
-        for extension in excluded_extension:
-            if file_name.endswith(extension):
-                # print 'Exclude for extension', extension, file_name
-                skipped = True
-                break
-
-        if not skipped and exclude_re.search(absolut_file_name) is not None:
-            # print 'Exclude for regexp', file_name
-            skipped = True
-
-        if not skipped:
+        absolut_file_name = os.path.join(path, file_name)
+        if not is_excluded(absolut_file_name):
             process_file(absolut_file_name)
 
 sys.exit(0)

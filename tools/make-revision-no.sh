@@ -1,20 +1,14 @@
-#! /usr/bin/perl
-# -*- perl -*-
+#! /bin/bash
 
 ####################################################################################################
 
-exit(1)if (@ARGV < 2);
+dir='LaptopControlPanel'
+echo Make $dir/Revision.py
 
-my $pattern = $ARGV[0];
-my $filename = $ARGV[1];
+revno=`bzr revno`
+echo 'revno', $revno
 
-open(INPUT, $filename);
-while (<INPUT>)
-{
-  exit(0) if (/$pattern/);
-}
-
-exit(1);
+sed -e "s/@bzrRevision@/\/bzr-revision-${revno}/" $dir/Version.py.in > $dir/Version.py
 
 ####################################################################################################
 # 

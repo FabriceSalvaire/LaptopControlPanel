@@ -1,7 +1,7 @@
 ####################################################################################################
 # 
-# LaptopControlPanel -.
-# Copyright (C) 2013 Salvaire Fabrice
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) 2013 Fabrice Salvaire
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
