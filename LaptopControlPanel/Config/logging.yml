@@ -42,7 +42,7 @@ loggers:
 # Programs
 #
 
-  battery-control:
+  laptop-control-panel:
     level: DEBUG
     #level: INFO
     handlers: [console]

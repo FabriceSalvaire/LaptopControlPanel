@@ -1,7 +1,7 @@
 ####################################################################################################
 # 
-# LaptopControlPanel - 
-# Copyright (C) Salvaire Fabrice 2013 
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) Fabrice Salvaire 2013 
 # 
 ####################################################################################################
 
@@ -14,10 +14,9 @@ import traceback
 
 ####################################################################################################
 
-from LaptopControlPanel.Logging.Email import Email
+from .Email import Email
 from LaptopControlPanel.Tools.Platform import Platform
-from LaptopControlPanel.Tools.Singleton import SingletonMetaClass
-# Fixme: import Config
+from LaptopControlPanel.Tools.Singleton import singleton
 
 ####################################################################################################
 
@@ -33,15 +32,13 @@ def format_exception(exception_type, exception_value, exception_traceback):
 
 ####################################################################################################
 
-
+@singleton
 class DispatcherExceptionHook(object):
 
     """ DispatcherExceptionHook install an exception hook in the Python interpreter. This class is a
     singleton and follows the Observer Pattern.  When an exception is raised, it is catched by the
     hook, that calls the method :meth:`notify` for each registered observer.
     """
-
-    __metaclass__ = SingletonMetaClass
 
     ##############################################
 

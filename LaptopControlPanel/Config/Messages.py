@@ -6,17 +6,41 @@
 ####################################################################################################
 
 ####################################################################################################
-    
-def rint(f):
-    return int(round(f))
+
+about_laptop_control_panel = """
+@ProjectDescription@..
+"""
 
 ####################################################################################################
-    
-def middle(a, b):
-    return .5*(a + b)
+
+system_information_message_pattern = """
+<h2>LaptopControlPanel %(babel_version)s</h2>
+<h2>Host %(node)s</h2>
+<h3>Hardware</h3>
+<ul>
+<li>Machine: %(machine)s</li>
+<li>Architecture: %(architecture)s</li>
+<li>CPU: %(cpu)s</li>
+<li>Number of cores: %(number_of_cores)u</li>
+<li>Memory Size: %(memory_size_mb)u MB</li>
+</ul>
+<h3>OpenGL</h3>
+<ul>
+<li>Render: %(gl_renderer)s</li>
+<li>Version: %(gl_version)s</li>
+<li>Vendor: %(gl_vendor)s</li>
+</ul>
+<h3>Software Versions</h3>
+<ul>
+<li>OS: %(os)s %(distribution)s</li>
+<li>Python %(python_version)s</li>
+<li>Qt %(qt_version)s</li>
+<li>PyQt %(pyqt_version)s</li>
+</ul>
+"""
 
 ####################################################################################################
-#
+# 
 # End
-#
+# 
 ####################################################################################################

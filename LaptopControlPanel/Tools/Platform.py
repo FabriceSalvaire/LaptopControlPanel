@@ -1,7 +1,7 @@
 ####################################################################################################
 # 
-# LaptopControlPanel - 
-# Copyright (C) Salvaire Fabrice 2013 
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) Fabrice Salvaire 2013 
 # 
 ####################################################################################################
 
@@ -25,8 +25,8 @@ from PyQt4 import QtCore, QtGui
 
 ####################################################################################################
 
-from LaptopControlPanel.Tools.EnumFactory import EnumFactory
-from LaptopControlPanel.Tools.Math import rint
+from .EnumFactory import EnumFactory
+from .Math import rint
 
 ####################################################################################################
 

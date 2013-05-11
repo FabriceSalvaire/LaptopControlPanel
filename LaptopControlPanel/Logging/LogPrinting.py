@@ -1,7 +1,7 @@
 ####################################################################################################
 # 
-# LaptopControlPanel - 
-# Copyright (C) Salvaire Fabrice 2013 
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) Fabrice Salvaire 2013 
 # 
 ####################################################################################################
 

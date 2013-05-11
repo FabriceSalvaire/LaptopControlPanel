@@ -1,4 +1,11 @@
 ####################################################################################################
+# 
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) 2013 Fabrice Salvaire
+# 
+####################################################################################################
+
+####################################################################################################
 
 import os
 
@@ -12,7 +19,7 @@ _this_file = PathTools.to_absolute_path(__file__)
 
 class Path(object):
 
-    module_directory = PathTools.parent_directory_of(_this_file, step=2)
+    babel_module_directory = PathTools.parent_directory_of(_this_file, step=2)
     config_directory = os.path.dirname(_this_file)
     share_directory = os.path.realpath(os.path.join(config_directory, '..', '..', 'share'))
 

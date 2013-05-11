@@ -1,7 +1,7 @@
 ####################################################################################################
 # 
-# LaptopControlPanel - 
-# Copyright (C) Salvaire Fabrice 2013 
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) Fabrice Salvaire 2013 
 # 
 ####################################################################################################
 
@@ -13,16 +13,14 @@ import logging.config
 
 ####################################################################################################
 
-from LaptopControlPanel.Logging.ExceptionHook import DispatcherExceptionHook, StderrExceptionHook, EmailExceptionHook
-from LaptopControlPanel.Tools.Singleton import SingletonMetaClass
+from .ExceptionHook import DispatcherExceptionHook, StderrExceptionHook, EmailExceptionHook
+from LaptopControlPanel.Tools.Singleton import singleton
 import LaptopControlPanel.Config.ConfigInstall as ConfigInstall
-# Fixme: import Config
 
 ####################################################################################################
 
+@singleton
 class ExceptionHookInitialiser(object):
-
-    __metaclass__ = SingletonMetaClass
 
     ##############################################
 
