@@ -1,0 +1,57 @@
+#! /usr/bin/env python
+
+####################################################################################################
+# 
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) Fabrice Salvaire 2013 
+# 
+####################################################################################################
+
+####################################################################################################
+#
+# Logging
+#
+
+import LaptopControlPanel.Logging.Logging as Logging
+
+logger = Logging.setup_logging('laptop-control-panel')
+
+####################################################################################################
+
+import argparse
+
+####################################################################################################
+
+from LaptopControlPanel.GUI.Application import Application
+from LaptopControlPanel.Tools.ProgramOptions import PathAction
+
+####################################################################################################
+#
+# Options
+#
+
+argument_parser = argparse.ArgumentParser(description='Laptop Control Panel')
+
+argument_parser.add_argument('--user-script',
+                             dest='user_script',
+                             action=PathAction,
+                             default=None,
+                             help='user script to execute')
+
+argument_parser.add_argument('--user-script-args',
+                             dest='user_script_args',
+                             default='',
+                             help="user script args (don't forget to quote)")
+
+args = argument_parser.parse_args()
+
+####################################################################################################
+
+application = Application(args=args)
+application.exec_()
+
+####################################################################################################
+# 
+# End
+# 
+####################################################################################################
