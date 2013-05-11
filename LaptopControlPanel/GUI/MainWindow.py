@@ -14,6 +14,7 @@ from PyQt4 import QtCore, QtGui
 ####################################################################################################
 
 from .MainWindowBase import MainWindowBase
+# from .Pages.Page import PageMetaClass
 
 ####################################################################################################
 
@@ -38,6 +39,31 @@ class MainWindow(MainWindowBase):
     def _init_ui(self):
 
         self.statusBar()
+
+        central_widget = QtGui.QWidget(self)
+        self.setCentralWidget(central_widget)
+        horizontal_Layout = QtGui.QHBoxLayout(central_widget)
+
+        self._list_widget = QtGui.QListWidget(central_widget)
+        self._list_widget.setMaximumSize(QtCore.QSize(200, 16777215))
+
+        self._stacked_widget = QtGui.QStackedWidget(central_widget)
+
+        self._list_widget.currentRowChanged.connect(self._stacked_widget.setCurrentIndex)
+
+        from .Pages.NetworkDevicePage import NetworkDevicePage
+        from .Pages.BatteryPage import BatteryPage
+        # for page_class in PageMetaClass.pages.itervalues():
+        for page_class in (NetworkDevicePage,
+                           BatteryPage,
+                           ):
+            item = QtGui.QListWidgetItem(page_class.__page_title__)
+            self._list_widget.addItem(item)
+            page = page_class(central_widget)
+            self._stacked_widget.addWidget(page)
+            
+        for widget in self._list_widget, self._stacked_widget:
+            horizontal_Layout.addWidget(widget)
 
         self._translate_ui()
 
