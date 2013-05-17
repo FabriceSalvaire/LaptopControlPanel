@@ -1,7 +1,7 @@
 ####################################################################################################
 # 
-# LaptopControlPanel - @ProjectDescription@.
-# Copyright (C) Fabrice Salvaire 2013 
+# @Project@ - @ProjectDescription@.
+# Copyright (C) 2013 Fabrice Salvaire
 # 
 ####################################################################################################
 
@@ -18,6 +18,43 @@ from __future__ import print_function
 ####################################################################################################
 
 import threading 
+
+####################################################################################################
+
+class SingletonMetaClass(type):
+
+    """ A singleton metaclass.
+    
+    This implementation supports subclassing and is thread safe.
+    """
+
+    ##############################################
+
+    def __init__(cls, class_name, super_classes, class_attribute_dict):
+
+        # It is called just after cls creation in order to complete cls.
+
+        # print('MetaSingleton __init__:', cls, class_name, super_classes, class_attribute_dict, sep='\n... ')
+
+        type.__init__(cls, class_name, super_classes, class_attribute_dict)
+
+        cls._instance = None
+        cls._rlock = threading.RLock() # A factory function that returns a new reentrant lock object.
+        
+    ##############################################
+
+    def __call__(cls, *args, **kwargs):
+
+        # It is called when cls is instantiated: cls(...).
+        # type.__call__ dispatches to the cls.__new__ and cls.__init__ methods.
+
+        # print('MetaSingleton __call__:', cls, args, kwargs, sep='\n... ')
+
+        with cls._rlock:
+            if cls._instance is None:
+                cls._instance = type.__call__(cls, *args, **kwargs)
+
+        return cls._instance
 
 ####################################################################################################
 
@@ -68,43 +105,6 @@ def singleton_func(cls):
         return instances[cls]
 
     return get_instance
-
-####################################################################################################
-
-class MetaSingleton(type):
-
-    """ A singleton metaclass.
-    
-    This implementation supports subclassing and is thread safe.
-    """
-
-    ##############################################
-
-    def __init__(cls, class_name, super_classes, class_attribute_dict):
-
-        # It is called just after cls creation in order to complete cls.
-
-        # print('MetaSingleton __init__:', cls, class_name, super_classes, class_attribute_dict, sep='\n... ')
-
-        type.__init__(cls, class_name, super_classes, class_attribute_dict)
-
-        cls._instance = None
-        cls._rlock = threading.RLock() # A factory function that returns a new reentrant lock object.
-        
-    ##############################################
-
-    def __call__(cls, *args, **kwargs):
-
-        # It is called when cls is instantiated: cls(...).
-        # type.__call__ dispatches to the cls.__new__ and cls.__init__ methods.
-
-        # print('MetaSingleton __call__:', cls, args, kwargs, sep='\n... ')
-
-        with cls._rlock:
-            if cls._instance is None:
-                cls._instance = type.__call__(cls, *args, **kwargs)
-
-        return cls._instance
 
 ####################################################################################################
 

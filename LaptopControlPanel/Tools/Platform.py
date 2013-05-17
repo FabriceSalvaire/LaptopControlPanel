@@ -1,7 +1,7 @@
 ####################################################################################################
 # 
-# LaptopControlPanel - @ProjectDescription@.
-# Copyright (C) Fabrice Salvaire 2013 
+# @Project@ - @ProjectDescription@.
+# Copyright (C) 2013 Fabrice Salvaire
 # 
 ####################################################################################################
 
@@ -9,16 +9,17 @@
 #
 #                                              Audit
 #
-# - 13/02/2013 Fabrice
+# - 02/05/2011 Fabrice
 #   - add dict interface ?
-#   - property
 #
 ####################################################################################################
 
 ####################################################################################################
 
+import ctypes
 import os
 import platform
+import re
 import sys
 
 from PyQt4 import QtCore, QtGui
@@ -27,6 +28,8 @@ from PyQt4 import QtCore, QtGui
 
 from .EnumFactory import EnumFactory
 from .Math import rint
+
+IntelCpuTools = ctypes.CDLL('libIntelCpuTools.so')
 
 ####################################################################################################
 
@@ -62,14 +65,14 @@ class Platform(object):
 
         # CPU
         self.cpu = self._get_cpu()
-        self.number_of_cores = self._get_number_of_cores()
+        self.number_of_cores = IntelCpuTools.number_of_cores()
         self.cpu_khz = self._get_cpu_khz()
-        self.cpu_mhz = rint(self._get_cpu_khz()/float(1000))
-        
+        self.cpu_mhz = self.cpu_khz/1000.
+
         # RAM
         self.memory_size_kb = self._get_memory_size_kb()
         self.memory_size_mb = rint(self.memory_size_kb/float(1024))
-        
+
         # Screen
         try:
             application = QtGui.QApplication.instance()
@@ -81,7 +84,7 @@ class Platform(object):
         self.screens = []
         for i in xrange(self.number_of_screens):
             self.screens.append(Screen(self, i))
-        
+
         # OpenGL
         self.gl_renderer = None
         self.gl_version = None
@@ -126,7 +129,6 @@ class Platform(object):
             return number_of_cores
 
         elif self.os == platform_enum.windows:
-
             return int(os.getenv('NUMBER_OF_PROCESSORS'))
 
     ##############################################
@@ -134,12 +136,13 @@ class Platform(object):
     def _get_cpu_khz(self):
 
         if self.os == platform_enum.linux:
-            with open('/proc/cpuinfo', 'rt') as cpuinfo:
-                for line in cpuinfo:
-                    if 'cpu MHz' in line:
-                        s = line.split(':')[1]
-                        return int(1000 * float(s))
-
+            # /proc/cpuinfo return current CPU clock throttling !
+            match = re.match('.*@ (\d\.\d\d)GHz', self.cpu)
+            if match is not None:
+                return float(match.groups()[0]) * 1000.
+            else:
+                # raise NameError("Can't retrieve CPU Clock")
+                return 1000. # for "Dual Core AMD Opteron(tm) Processor 285"
         if self.os == platform_enum.windows:
             raise NotImplementedError
 
@@ -171,7 +174,14 @@ class Platform(object):
     ##############################################
 
     def __str__(self):
-      
+
+        # if self.os == platform_enum.linux:
+        #     os = 'Linux'
+        # elif self.os == platform_enum.windows:
+        #     os = 'Windows'
+        # elif self.os == platform_enum.macosx:
+        #     os = 'Mac OSX'
+
         message_template = '''
 Platform %(node)s
   Hardware:
