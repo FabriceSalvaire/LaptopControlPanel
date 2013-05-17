@@ -52,10 +52,10 @@ class MainWindow(MainWindowBase):
         self._list_widget.currentRowChanged.connect(self._stacked_widget.setCurrentIndex)
 
         from .Pages.NetworkDevicePage import NetworkDevicePage
-        from .Pages.BatteryPage import BatteryPage
+        from .Pages.PowerSourcePage import PowerSourcePage
         # for page_class in PageMetaClass.pages.itervalues():
         for page_class in (NetworkDevicePage,
-                           BatteryPage,
+                           PowerSourcePage,
                            ):
             item = QtGui.QListWidgetItem(page_class.__page_title__)
             self._list_widget.addItem(item)
@@ -64,6 +64,8 @@ class MainWindow(MainWindowBase):
             
         for widget in self._list_widget, self._stacked_widget:
             horizontal_Layout.addWidget(widget)
+
+        self._application.timer.timeout.connect(self._refresh)
 
         self._translate_ui()
 
@@ -79,6 +81,12 @@ class MainWindow(MainWindowBase):
     def closeEvent(self, event=None):
 
         self._application.exit()
+
+    ##############################################
+
+    def _refresh(self):
+
+        self._stacked_widget.currentWidget().refresh()
 
 ####################################################################################################
 #

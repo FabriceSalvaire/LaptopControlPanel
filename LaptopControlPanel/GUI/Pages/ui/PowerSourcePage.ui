@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>form</class>
+ <widget class="QWidget" name="form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>575</width>
+    <height>549</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="1">
+    <layout class="QGridLayout" name="grid_layout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="ac_status_title_label">
+       <property name="text">
+        <string>AC Status</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="battery_status_title_label">
+       <property name="text">
+        <string>Status</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="battery_status_label">
+       <property name="text">
+        <string>Discharging</string>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>10</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="battery_capacity_title_label">
+       <property name="text">
+        <string>Capacity</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="battery_capacity_label">
+       <property name="text">
+        <string>80 %</string>
+       </property>
+       <property name="indent">
+        <number>10</number>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="battery_cycle_count_title_label">
+       <property name="text">
+        <string>Cycle Count</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="battery_cycle_count_label">
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="indent">
+        <number>10</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="ac_status_label">
+       <property name="text">
+        <string>online</string>
+       </property>
+       <property name="indent">
+        <number>10</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -7,6 +7,7 @@
 
 ####################################################################################################
 
+import logging
 import os
 import subprocess
 
@@ -34,13 +35,15 @@ class NetworkDevices(dict):
 
 class NetworkDevice(SysDevice):
 
+    _logger = logging.getLogger(__name__)
+
     ##############################################
 
     def __init__(self, path):
 
         super(NetworkDevice, self).__init__(path)
 
-        self._index = self._read('index')
+        self._index = self._read_int('index')
         self._name = self._read('name')
         self._type = self._read('type')
 
@@ -68,10 +71,11 @@ class NetworkDevice(SysDevice):
     def soft(self, status):
 
         if status:
-            block_status = 'unblock'
-        else:
             block_status = 'block'
-        subprocess.check_call(['/sbin/rfkill', block_status, self._index])
+        else:
+            block_status = 'unblock'
+        self._logger.info("Call rfkill %s %u for device %s" % (block_status, self._index, self.name))
+        subprocess.check_call(['/sbin/rfkill', block_status, str(self._index)])
 
 ####################################################################################################
 # 

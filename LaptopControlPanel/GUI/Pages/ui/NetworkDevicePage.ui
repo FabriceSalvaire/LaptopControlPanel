@@ -14,25 +14,8 @@
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
-    <widget class="QPushButton" name="wifi_push_button">
-     <property name="text">
-      <string>Bluetooth</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QPushButton" name="bluetooth_push_button">
-     <property name="text">
-      <string>Wifi</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-    </widget>
+   <item row="0" column="1">
+    <layout class="QGridLayout" name="grid_layout"/>
    </item>
   </layout>
  </widget>
