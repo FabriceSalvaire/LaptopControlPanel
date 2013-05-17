@@ -22,6 +22,8 @@
 
 import os
 
+from distutils.core import Extension
+
 ####################################################################################################
 
 
@@ -65,6 +67,7 @@ setup_dict = dict(
     install_requires=[
         'pyqt>=4.9',
         ],
+    ext_modules=[Extension('libIntelCpuTools', ['modules/IntelCpuTools.cpp'], include_dirs=['modules'])],
     )
 
 ####################################################################################################
