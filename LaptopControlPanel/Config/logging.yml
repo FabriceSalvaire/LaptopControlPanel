@@ -48,6 +48,12 @@ loggers:
     handlers: [console]
     propagate: no
 
+  battery-control:
+    level: DEBUG
+    #level: INFO
+    handlers: [console]
+    propagate: no
+
 ##################################################
 #
 # Modules

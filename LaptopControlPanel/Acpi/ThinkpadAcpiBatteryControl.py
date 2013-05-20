@@ -1,7 +1,7 @@
 ####################################################################################################
 # 
 # Thinkpad ACPI Battery Control
-# Copyright (C) Salvaire Fabrice 2013 
+# Copyright (C) Fabrice Salvaire 2013 
 # 
 ###################################################################################################
 
@@ -57,7 +57,7 @@ class BatteryControl(object):
         self._set_peak_shift_state_acpi_call = self._define_function(
             name='PSSS',
             input_arguments=AcpiCallArguments(inhibit_charge=0,
-                                              reserved1=0,
+                                              reserved1=7,
                                               timer=23,
                                               reserved2=31,
                                               ),
@@ -103,7 +103,7 @@ class BatteryControl(object):
 
         self._set_charge_start_threshold_acpi_call = self._define_function(
             name='BCCS',
-            input_arguments=AcpiCallArguments(charge_start_capacity=7,
+            input_arguments=AcpiCallArguments(start_threshold=7,
                                               battery_id=9,
                                               reserved=31,
                                               ),
@@ -115,7 +115,7 @@ class BatteryControl(object):
         self._get_charge_stop_threshold_acpi_call = self._define_function(
             name='BCSG',
             input_arguments=AcpiCallArguments(battery_id=7,
-                                              reserved=0),
+                                              reserved=31),
             output_arguments=AcpiCallArguments(stop_threshold=7,
                                                capability=8,
                                                can_specify_every_battery=9,
@@ -180,9 +180,9 @@ class BatteryControl(object):
 
         if threshold is None:
             threshold = 0
-        elif not (1 <= threshold <= 99):
+        elif not (0 <= threshold <= 99):
             raise ValueError("Wrong charge threshold value " + str(threshold))
-        return threshold
+        return str(threshold)
 
     ##############################################
 
@@ -197,7 +197,7 @@ class BatteryControl(object):
 
         threshold = self._check_charge_threshold(threshold)
         result = self._set_charge_start_threshold_acpi_call.call(battery_id=battery,
-                                                                 charge_start_capacity=threshold,
+                                                                 start_threshold=threshold,
                                                                  )
         self._check_error_status(result)
 
@@ -207,7 +207,7 @@ class BatteryControl(object):
 
         threshold = self._check_charge_threshold(threshold)
         result = self._set_charge_stop_threshold_acpi_call.call(battery_id=battery,
-                                                                charge_stop_capacity=threshold,
+                                                                stop_threshold=threshold,
                                                                 )
         self._check_error_status(result)
 

@@ -3,7 +3,7 @@
 
 ####################################################################################################
 # 
-# LaptopControlPanel - 
+# LaptopControlPanel - @ProjectDescription@.
 # Copyright (C) 2013 
 # 
 ####################################################################################################
@@ -58,7 +58,6 @@ class BatteryArgumentAction(argparse.Action):
             value = battery_control.secondary_battery
         elif values == 'both':
             value = battery_control.either_both_battery
-        print namespace, self.dest, value
         setattr(namespace, self.dest, value)
 
 ####################################################################################################
@@ -78,7 +77,7 @@ argument_parser = argparse.ArgumentParser(description='Thinkpad Battery Control'
                                           formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 argument_parser.add_argument('--battery',
-                             default='main',
+                             default=battery_control.main_battery,
                              choices=['main', 'secondary', 'both'],
                              action=BatteryArgumentAction,
                              help='Select Battery')
@@ -90,9 +89,11 @@ argument_parser_set_threshold = subparsers.add_parser('set-threshold',
                                                       formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 argument_parser_set_threshold.add_argument('--start',
                                            default=40,
+                                           type=int,
                                            help='Start threshold')
 argument_parser_set_threshold.add_argument('--stop',
                                            default=80,
+                                           type=int,
                                            help='Stop threshold')
 argument_parser_set_threshold.set_defaults(func=set_threshold)
 
