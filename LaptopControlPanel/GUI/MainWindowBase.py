@@ -64,7 +64,7 @@ class MainWindowBase(QtGui.QMainWindow):
         application = self._application
 
         self._file_menu = file_menu = self.menu_bar.addMenu('File')
-        file_menu.addAction(application.exit_action) # Fixme: At the end
+        file_menu.addAction(application.quit_action) # Fixme: At the end
         
         self._help_menu = help_menu = self.menu_bar.addMenu('Help')
         help_menu.addAction(application.help_action)

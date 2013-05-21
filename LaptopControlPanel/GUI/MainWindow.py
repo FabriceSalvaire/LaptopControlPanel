@@ -80,7 +80,17 @@ class MainWindow(MainWindowBase):
 
     def closeEvent(self, event=None):
 
-        self._application.exit()
+        tray_icon = self._application.tray_icon
+        if tray_icon is not None and tray_icon.isVisible():
+            # Fixme: Config.Title
+            # QtGui.QMessageBox.information(self, "Laptop Control Panel",
+            #                               "The program will keep running in the system tray. To "
+            #                               "terminate the program, choose <b>Quit</b> in the "
+            #                               "context menu of the system tray entry.")
+            self.hide()
+            event.ignore()
+        else:
+            self._application.exit()
 
     ##############################################
 

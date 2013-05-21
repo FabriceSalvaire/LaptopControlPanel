@@ -91,9 +91,10 @@ class GuiApplicationBase(ApplicationBase, QtGui.QApplication):
                           self,
                           triggered=self.about)
 
-        self.exit_action = \
-            QtGui.QAction('Exit',
+        self.quit_action = \
+            QtGui.QAction('&Quit',
                           self,
+                          # triggered=QtGui.qApp.quit,
                           triggered=self.exit)
 
         self.help_action = \
