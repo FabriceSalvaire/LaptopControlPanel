@@ -29,12 +29,18 @@ class ProcFile(object):
         for item in format_list:
             if separator:
                 if not isinstance(item, str):
-                    raise ValueError("A separator string is expected")
-            elif not isinstance(item, type):
-                raise ValueError("A type is expected")
+                    raise ValueError("A separator string is expected " + str(item))
+            elif isinstance(item, tuple) and len(item) == 2:
+                field_name, field_type = item
+                if not isinstance(field_name, str):
+                    raise ValueError("A string is expected " + str(item))
+                if not isinstance(field_type, type):
+                    raise ValueError("A type is expected " + str(item))
+            else:
+                raise ValueError("A 2-tuple is expected " + str(item))
             separator = not separator
 
-        # check separator is not ''
+        # check separator is not '', field_name is uniq
 
         return format_list
 
@@ -57,10 +63,11 @@ class ProcFile(object):
 
         number_of_fields = len(compiled_format_list)/2 # +1 doesn't matter
 
-        fields = []
+        fields = {}
         for i in xrange(number_of_fields):
             index = 2*i +1
-            field_type, separator = compiled_format_list[index:index+2]
+            field_tuple, separator = compiled_format_list[index:index+2]
+            field_name, field_type = field_tuple
             if separator:
                 separator_location = line.find(separator)
                 if not separator_location: # must be > 0
@@ -68,8 +75,7 @@ class ProcFile(object):
             else:
                 separator_location = None
             field_text = line[:separator_location]
-            field = field_type(field_text)
-            fields.append(field)
+            fields[field_name] = field_type(field_text)
             if separator_location:
                 line = line[separator_location + len(separator):]
 
@@ -88,22 +94,34 @@ class ProcOneLineFile(ProcFile):
 
         self._path = self.join(self.__file_name__)
         self._compiled_format_list = self.compile_format_list(self.__format_list__)
+        self._state = None
 
     ##############################################
 
-    def read(self):
+    def __getattr__(self, key):
+
+        return self._state[key]
+
+    ##############################################
+
+    def update(self):
 
         with open(self._path, 'r') as f:
             line = f.readline().rstrip()
-        return self.parse_line(self._compiled_format_list, line)
+        self._state = self.parse_line(self._compiled_format_list, line)
 
 ####################################################################################################
 
 class LoadAverage(ProcOneLineFile):
 
-    # number_of_job_1_min number_of_job_5_min number_of_job_15_min number_of_runnable_entities/number_of_job_entities last_pid
-    __format_list__= (float, ' ', float, ' ', float, ' ', int, '/', int, ' ', int)
     __file_name__ = 'loadavg'
+
+    __format_list__= (('number_of_job_1_min', float), ' ',
+                      ('number_of_job_5_min', float), ' ',
+                      ('number_of_job_15_min', float), ' ',
+                      ('number_of_runnable_entities', int), '/',
+                      ('number_of_job_entities', int), ' ',
+                      ('last_pid', int))
                         
 ####################################################################################################
 # 
