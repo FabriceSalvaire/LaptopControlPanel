@@ -49,7 +49,7 @@ setup_dict = dict(
     license = "GPLv3",
     keywords = "...",
     url='http://fabrice-salvaire.pagesperso-orange.fr/software/index.html',
-    scripts=['bin/LaptopControlPanel'],
+    scripts=['bin/laptop-control-panel'],
     packages=['LaptopControlPanel'],
     data_files = [('share/LaptopControlPanel/icons',['share/icons/LaptopControlPanel.svg']),
                   ('share/applications', ['spec/LaptopControlPanel.desktop']),

@@ -6,13 +6,13 @@ py_files := $(patsubst %.ui, %_ui.py, $(wildcard *.ui))
 
 ####################################################################################################
 
-#all: babel_rc.py $(py_files)
+#all: project_rc.py $(py_files)
 all: $(py_files)
 
 ####################################################################################################
 
-#babel_rc.py : babel.qrc
-#	 pyrcc4 babel.qrc -o babel_rc.py
+#project_rc.py : project.qrc
+#	 pyrcc4 project.qrc -o project_rc.py
 
 ####################################################################################################
 

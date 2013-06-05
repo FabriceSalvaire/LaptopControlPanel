@@ -68,14 +68,14 @@ Bug description:
         redmine_rest = RedmineRest(url=Config.RedmineRest.url,
                                    key=Config.RedmineRest.key)
 
-        babel_project = redmine_rest.get_project(Config.RedmineRest.project)
+        project = redmine_rest.get_project(Config.RedmineRest.project)
 
-        babel_project.new_issue(subject=subject,
-                                description=description,
-                                priority_id=None,
-                                tracker_id=None,
-                                assigned_to_id=None,
-                                user_data=None)
+        project.new_issue(subject=subject,
+                          description=description,
+                          priority_id=None,
+                          tracker_id=None,
+                          assigned_to_id=None,
+                          user_data=None)
         
         self.accept()
 

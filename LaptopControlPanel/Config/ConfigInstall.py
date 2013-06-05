@@ -19,7 +19,7 @@ _this_file = PathTools.to_absolute_path(__file__)
 
 class Path(object):
 
-    babel_module_directory = PathTools.parent_directory_of(_this_file, step=2)
+    module_directory = PathTools.parent_directory_of(_this_file, step=2)
     config_directory = os.path.dirname(_this_file)
     share_directory = os.path.realpath(os.path.join(config_directory, '..', '..', 'share'))
 

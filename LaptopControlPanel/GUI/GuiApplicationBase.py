@@ -31,7 +31,7 @@ import LaptopControlPanel.Config.Messages as Messages
 import LaptopControlPanel.Version as Version
 
 # Load RC
-#import .ui.babel_rc
+#import .ui.project_rc
 
 ####################################################################################################
 
@@ -79,7 +79,7 @@ class GuiApplicationBase(ApplicationBase, QtGui.QApplication):
         pixmap = QtGui.QPixmap(':/splash screen/images/splash_screen.png')
         self._splash = QtGui.QSplashScreen(pixmap)
         self._splash.show()
-        self._splash.showMessage('<h2>LaptopControlPanel %(version)s</h2>' % {'version':str(Version.babel)})
+        self._splash.showMessage('<h2>LaptopControlPanel %(version)s</h2>' % {'version':str(Version.software_version)})
         self.processEvents()
 
     ##############################################
@@ -151,14 +151,14 @@ class GuiApplicationBase(ApplicationBase, QtGui.QApplication):
         url = QtCore.QUrl()
         url.setScheme(Config.Help.url_scheme)
         url.setHost(Config.Help.host)
-        url.setPath(Config.Help.url_path_pattern) # % str(Version.babel))
+        url.setPath(Config.Help.url_path_pattern) # % str(Version.software_version))
         QtGui.QDesktopServices.openUrl(url)
 
     ##############################################
 
     def about(self):
         
-        message = Messages.about_babel % {'version':str(Version.babel)}
+        message = Messages.about % {'version':str(Version.software_version)}
         QtGui.QMessageBox.about(self.main_window, 'About LaptopControlPanel', message)
 
     ##############################################
@@ -167,7 +167,7 @@ class GuiApplicationBase(ApplicationBase, QtGui.QApplication):
 
         fields = dict(self._platform.__dict__)
         fields.update({
-                'babel_version': str(Version.babel),
+                'software_version': str(Version.software_version),
                 })  
         message = Messages.system_information_message_pattern % fields
         QtGui.QMessageBox.about(self.main_window, 'System Information', message)

@@ -58,7 +58,7 @@ Bug description:
 
 ---------------------------------------------------------------------------------
 LaptopControlPanel Version:
-  %(babel_version)s
+  %(software_version)s
 
 ---------------------------------------------------------------------------------
 %(traceback)s
@@ -76,7 +76,7 @@ LaptopControlPanel Version:
         platform.query_opengl()
        
         message = template_message % {'description': str(form.description_plain_text_edit.toPlainText()),
-                                      'babel_version': str(Version.babel),
+                                      'software_version': str(Version.software_version),
                                       'platform': str(platform),
                                       'traceback': self._traceback,
                                       }

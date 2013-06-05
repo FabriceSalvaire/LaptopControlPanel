@@ -7,14 +7,14 @@
 
 ####################################################################################################
 
-about_laptop_control_panel = """
+about = """
 @ProjectDescription@..
 """
 
 ####################################################################################################
 
 system_information_message_pattern = """
-<h2>LaptopControlPanel %(babel_version)s</h2>
+<h2>LaptopControlPanel %(software_version)s</h2>
 <h2>Host %(node)s</h2>
 <h3>Hardware</h3>
 <ul>

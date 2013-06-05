@@ -30,7 +30,7 @@ from xml.dom import minidom, getDOMImplementation
 # <project>
 #   <id>1</id>
 #   <name>LaptopControlPanel</name>
-#   <identifier>babel</identifier>
+#   <identifier>project_identifier</identifier>
 #   <description/>
 #   <homepage/>
 #   <created_on>Tue Feb 02 16:35:34 +0100 2010</created_on>
@@ -404,17 +404,17 @@ if __name__ == '__main__':
     redmine_rest = RedmineRest(url='http://intranet/redmine-it/public',
                                key='02caaf292242bbfde9000291cb9955337fa87518')
 
-    babel_project = redmine_rest.get_project('LaptopControlPanel')
+    project = redmine_rest.get_project('LaptopControlPanel')
 
     print redmine_rest.get_issue(173)
 
     if False:
-        babel_project.new_issue(subject='This a test!',
-                                description='Just to test REST API.',
-                                priority_id=None,
-                                tracker_id=None,
-                                assigned_to_id=None,
-                                user_data=None)
+        project.new_issue(subject='This a test!',
+                          description='Just to test REST API.',
+                          priority_id=None,
+                          tracker_id=None,
+                          assigned_to_id=None,
+                          user_data=None)
 
 ####################################################################################################
 #
