@@ -1,0 +1,69 @@
+#! /usr/bin/env python
+# -*- Python -*-
+
+####################################################################################################
+# 
+# LaptopControlPanel - @ProjectDescription@.
+# Copyright (C) 2013 
+# 
+####################################################################################################
+
+####################################################################################################
+#
+# Logging
+#
+
+import LaptopControlPanel.Logging.Logging as Logging
+
+logger = Logging.setup_logging('battery-monitoring')
+
+####################################################################################################
+
+import argparse
+import sys
+import time
+
+####################################################################################################
+
+from LaptopControlPanel.Monitoring.BatteryMonitoring import BatteryMonitor
+
+####################################################################################################
+#
+# Options
+#
+
+argument_parser = argparse.ArgumentParser(description='Battery Monitoring',
+                                          formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+argument_parser.add_argument('--database-path',
+                             default='battery-status.sqlite',
+                             help='Database base')
+
+argument_parser.add_argument('--time-resolution',
+                             default=60,
+                             type=int,
+                             help='Time Resolution')
+
+args = argument_parser.parse_args()
+
+####################################################################################################
+
+battery_monitor = BatteryMonitor(args.database_path, args.time_resolution)
+
+try:
+    battery_monitor.start()
+    
+    # Main Thread loop
+    while True:
+        time.sleep(60)
+        if not battery_monitor.is_alive():
+            raise SystemExit
+
+except (KeyboardInterrupt, SystemExit):
+    sys.exit(1)
+
+####################################################################################################
+# 
+# End
+# 
+####################################################################################################

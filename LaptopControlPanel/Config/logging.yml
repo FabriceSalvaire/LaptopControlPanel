@@ -54,6 +54,12 @@ loggers:
     handlers: [console]
     propagate: no
 
+  battery-monitoring:
+    level: DEBUG
+    #level: INFO
+    handlers: [console]
+    propagate: no
+
 ##################################################
 #
 # Modules
