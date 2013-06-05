@@ -87,6 +87,12 @@ class Application(GuiApplicationBase, ApplicationBase):
     @property
     def tray_icon(self):
         return self._tray_icon
+
+    ##############################################
+
+    @property
+    def icon_loader(self):
+        return self._icon_loader
      
     ##############################################
 

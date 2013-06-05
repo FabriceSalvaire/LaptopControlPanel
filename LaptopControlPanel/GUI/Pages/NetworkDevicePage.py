@@ -54,7 +54,9 @@ class NetworkDevicePage(PageBase):
             widgets = [type_label, name_label]
             if device.hard:
                 hard_lock_label = QtGui.QLabel(self)
-                hard_lock_label.setText('hard locked')
+                icon = self._application.icon_loader.get_icon('object-locked', icon_size=32)
+                # hard_lock_label.setText('hard locked')
+                hard_lock_label.setPixmap(icon.pixmap(icon.availableSizes()[0]))
                 widgets.append(hard_lock_label)
             else:
                 soft_lock_check_box = QtGui.QCheckBox(self)
