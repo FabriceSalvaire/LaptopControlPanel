@@ -20,6 +20,7 @@ logger = Logging.setup_logging('battery-control')
 ####################################################################################################
 
 import argparse
+import sys
 
 ####################################################################################################
 
@@ -40,7 +41,11 @@ def set_threshold(args):
 def get_threshold(args):
     start = battery_control.get_start_threshold(battery=args.battery)
     stop = battery_control.get_stop_threshold(battery=args.battery)
-    print "Battery charge threshold [start, stop] range is set to [%u, %u] %%" % (
+    if args.gui:
+        template = '{"start_threshold": %u, "stop_threshold": %u}'
+    else:
+        template = 'Battery charge threshold [start, stop] range is set to [%u, %u] %%'
+    print template % (
         start.start_threshold, stop.stop_threshold)
 
 ####################################################################################################
@@ -75,6 +80,11 @@ class StatusAction(argparse.Action):
 argument_parser = argparse.ArgumentParser(description='Thinkpad Battery Control',
                                           epilog="To get the subcommand help use 'subcommand --help'",
                                           formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+argument_parser.add_argument('--gui',
+                             default=False,
+                             action='store_true',
+                             help='GUI Mode')
 
 argument_parser.add_argument('--battery',
                              default=battery_control.main_battery,
@@ -111,6 +121,8 @@ argument_parser_force_discharge.set_defaults(func=force_discharge)
 
 args = argument_parser.parse_args()
 args.func(args)
+
+sys.exit(0)
 
 ####################################################################################################
 # 

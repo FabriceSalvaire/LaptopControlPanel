@@ -6,9 +6,13 @@
 #
 ####################################################################################################
 
-cd LaptopControlPanel/GUI/ui
-make -f Makefile.pyqt
-cd -
+pushd $PWD
+for directory in `find $PWD -type d -name ui`; do
+  echo $directory
+  cd $directory 
+  make -f Makefile.pyqt
+done
+popd
 
 ####################################################################################################
 #
