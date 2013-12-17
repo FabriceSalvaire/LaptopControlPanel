@@ -1,9 +1,9 @@
 ####################################################################################################
 # 
-# Thinkpad ACPI Battery Control
-# Copyright (C) Fabrice Salvaire 2013 
+# LaptopControlPanel - A Laptop Control Panel
+# Copyright (C) 2013 Fabrice Salvaire
 # 
-###################################################################################################
+####################################################################################################
 
 """ This module provides an interface to ACPI Calls to control Thinkpad Laptop Battery.
 
