@@ -24,7 +24,6 @@ from PyQt4 import QtGui, QtCore
 ####################################################################################################
 
 from .CriticalErrorForm import CriticalErrorForm
-from .EmailBugForm import EmailBugForm
 from LaptopControlPanel.Application.ApplicationBase import ApplicationBase
 import LaptopControlPanel.Config.Config as Config
 import LaptopControlPanel.Config.Messages as Messages
@@ -86,31 +85,21 @@ class GuiApplicationBase(ApplicationBase, QtGui.QApplication):
 
     def _init_actions(self):
 
-        self.about_action = \
-            QtGui.QAction('About LaptopControlPanel',
-                          self,
-                          triggered=self.about)
-
         self.quit_action = \
             QtGui.QAction('&Quit',
                           self,
                           # triggered=QtGui.qApp.quit,
                           triggered=self.exit)
 
+        self.about_action = \
+            QtGui.QAction('About',
+                          self,
+                          triggered=self.about)
+
         self.help_action = \
             QtGui.QAction('Help',
                           self,
                           triggered=self.open_help)
-
-        self.show_system_information_action = \
-            QtGui.QAction('System Information',
-                          self,
-                          triggered=self.show_system_information)
-        
-        self.send_email_action = \
-            QtGui.QAction('Send Email',
-                          self,
-                          triggered=self.send_email)
 
     ##############################################
     
@@ -119,8 +108,6 @@ class GuiApplicationBase(ApplicationBase, QtGui.QApplication):
         self._splash.finish(self._main_window)
         self.processEvents()
         del self._splash
-
-        QtCore.QTimer.singleShot(0, self.execute_given_user_script)
 
         self.show_message('Welcome to LaptopControlPanel')
 
@@ -152,33 +139,16 @@ class GuiApplicationBase(ApplicationBase, QtGui.QApplication):
         url.setScheme(Config.Help.url_scheme)
         url.setHost(Config.Help.host)
         url.setPath(Config.Help.url_path_pattern) # % str(Version.software_version))
-        QtGui.QDesktopServices.openUrl(url)
+        #!# QtGui.QDesktopServices.openUrl(url)
 
     ##############################################
 
     def about(self):
-        
+
+        a = 1 / 0
         message = Messages.about % {'version':str(Version.software_version)}
         QtGui.QMessageBox.about(self.main_window, 'About LaptopControlPanel', message)
 
-    ##############################################
-
-    def show_system_information(self):
-
-        fields = dict(self._platform.__dict__)
-        fields.update({
-                'software_version': str(Version.software_version),
-                })  
-        message = Messages.system_information_message_pattern % fields
-        QtGui.QMessageBox.about(self.main_window, 'System Information', message)
-
-    ###############################################
-
-    def send_email(self):
-        
-        dialog = EmailBugForm()
-        dialog.exec_()
-        
 ####################################################################################################
 #
 # End

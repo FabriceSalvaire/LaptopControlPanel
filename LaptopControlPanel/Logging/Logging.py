@@ -13,7 +13,7 @@ import logging.config
 
 ####################################################################################################
 
-from .ExceptionHook import DispatcherExceptionHook, StderrExceptionHook, EmailExceptionHook
+from .ExceptionHook import DispatcherExceptionHook, StderrExceptionHook
 from LaptopControlPanel.Tools.Singleton import singleton
 import LaptopControlPanel.Config.ConfigInstall as ConfigInstall
 
@@ -24,7 +24,7 @@ class ExceptionHookInitialiser(object):
 
     ##############################################
 
-    def __init__(self, context, stderr=True, email=False):
+    def __init__(self, context, stderr=True):
 
         self._context = context
         self._dispatcher_exception_hook = DispatcherExceptionHook()
@@ -32,10 +32,6 @@ class ExceptionHookInitialiser(object):
         if stderr:
             stderr_exception_hook = StderrExceptionHook()
             self._dispatcher_exception_hook.register_observer(stderr_exception_hook)
-
-        if email:
-            email_exception_hook = EmailExceptionHook(context=self._context, recipients=Config.Email.to_address)
-            self._dispatcher_exception_hook.register_observer(email_exception_hook)
 
 ####################################################################################################
 

@@ -25,8 +25,6 @@ from PyQt4 import QtGui, QtCore
 
 ####################################################################################################
 
-from .EmailBugForm import EmailBugForm
-from .NewIssueForm import NewIssueForm
 from LaptopControlPanel.Logging.ExceptionHook import format_exception
 import LaptopControlPanel.Tools.BackTrace as BackTrace
 
@@ -46,8 +44,6 @@ class CriticalErrorForm(QtGui.QDialog, Ui_critical_error_form):
 
         self.setupUi(self)
 
-        self.expert_group_box.hide()
-
         self._exception_type = exception_type
         self._exception_value = exception_value
         self._exception_backtrace = exception_backtrace
@@ -58,8 +54,6 @@ class CriticalErrorForm(QtGui.QDialog, Ui_critical_error_form):
         # Fixme: call critical exit
         self.exit_button.clicked.connect(lambda : sys.exit(1))
         self.show_backtrace_button.clicked.connect(self.show_backtrace)
-        self.send_email_button.clicked.connect(self.send_email)
-        self.new_issue_button.clicked.connect(self.new_issue)
 
         title = str(exception_value)
         self.error_message_label.setText(title[:50])
@@ -78,20 +72,6 @@ class CriticalErrorForm(QtGui.QDialog, Ui_critical_error_form):
 
         # print trace_back_text_highlighted
         self.back_trace_text_browser.setHtml(self._trace_back_text_highlighted)
-
-    ###############################################
-
-    def send_email(self):
-        
-        dialog = EmailBugForm(self._backtrace)
-        dialog.exec_()
-
-    ###############################################
-
-    def new_issue(self):
-
-        dialog = NewIssueForm(self._backtrace)
-        dialog.exec_()
 
 ####################################################################################################
 #
