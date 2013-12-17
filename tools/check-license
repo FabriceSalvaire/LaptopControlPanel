@@ -78,13 +78,13 @@ class LicenseChecker(object):
 
     def set(self):
 
-        root_path = os.path.dirname(__file__)
+        root_path = os.path.dirname(os.path.realpath(__file__))
         replace_slice = os.path.join(root_path, 'replace-slice')
         license_model_py = os.path.join(root_path, 'license-model.py')
 
         for path in self.iter_file():
             line_slice = self._check_file(path)
-            if line_slice is not None:
+            if path != license_model_py and line_slice is not None:
                 # input_path = path + '~'
                 # os.rename(path, input_path)
                 print 'Set', path

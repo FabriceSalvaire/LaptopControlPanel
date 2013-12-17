@@ -7,10 +7,12 @@ license=$2
 start=$3
 stop=$4
 
-mv ${path} ${path}~
+# mv : permissions are lost
+cp ${path} ${path}~
 head -n ${start} ${path}~ > ${path}
 cat ${license} >> ${path}
 tail -n +${stop} ${path}~ >> ${path}
+# cp --attributes-only ${path}~ ${path}
 
 ####################################################################################################
 # 
