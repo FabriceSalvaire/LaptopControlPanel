@@ -1,31 +1,18 @@
-modname := acpi_call
-obj-m := $(modname).o
+obj-m := acpi_call.o
 
 KVERSION := $(shell uname -r)
 KDIR := /lib/modules/$(KVERSION)/build
-PWD := "$$(pwd)"
-
-ifdef DEBUG
-CFLAGS_$(obj-m) := -DDEBUG
-endif
+PWD := $(shell pwd)
 
 default:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 clean:
-	$(MAKE) O=$(PWD) -C $(KDIR) M=$(PWD) clean
-
-load:
-	-rmmod $(modname)
-	insmod $(modname).ko
+	$(MAKE) -C $(KDIR) M=$(PWD) clean
 
 install:
-	mkdir -p /lib/modules/$(KVERSION)/misc/$(modname)
-	install -m 0755 -o root -g root $(modname).ko /lib/modules/$(KVERSION)/misc/$(modname)
-	depmod -a
+	$(MAKE) -C $(KDIR) M=$(PWD) modules_install
 
-uninstall:
-	rm /lib/modules/$(KVERSION)/misc/$(modname)/$(modname).ko
-	rmdir /lib/modules/$(KVERSION)/misc/$(modname)
-	rmdir /lib/modules/$(KVERSION)/misc
-	depmod -a
+load:
+	-/sbin/rmmod acpi_call
+	/sbin/insmod acpi_call.ko

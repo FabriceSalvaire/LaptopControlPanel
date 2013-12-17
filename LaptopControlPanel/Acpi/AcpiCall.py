@@ -59,6 +59,8 @@ class AcpiCallDevice(object):
         with open(self._acpi_call_device, 'r') as device_file:
             return_value = device_file.read()
             self._logger.debug("Call returned '%s'" % return_value)
+        # Fixme:
+        return_value = return_value[:-1] # '\x00'
 
         return int(return_value, 16)
 
