@@ -25,12 +25,19 @@ class SleepThread(threading.Thread):
         super(SleepThread, self).__init__()
 
         self.sleep_time = sleep_time
+
+        self._stop = threading.Event()
+
+    ##############################################
+
+    def stop(self):
+        self._stop.set()
         
     ###############################################
 
     def run(self):
 
-        while True:
+        while not self._stop.is_set():
             time.sleep(self.sleep_time)
             self.work()
 

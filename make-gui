@@ -7,7 +7,7 @@
 ####################################################################################################
 
 pushd $PWD
-for directory in `find $PWD -follow -type d -name ui`; do
+for directory in `find $PWD/LaptopControlPanel -follow -type d -name ui`; do
   echo $directory
   cd $directory 
   make -f Makefile.pyqt

@@ -9,8 +9,21 @@
 
 ####################################################################################################
 
+import logging
+
+from PyQt4 import QtCore, QtGui
+
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
+from matplotlib.figure import Figure
+
+import numpy as np
+
+####################################################################################################
+
 from .Page import PageBase
 from LaptopControlPanel.Acpi.Fan import FanManager
+from LaptopControlPanel.Monitoring.RoundRobinMonitoring import RoundRobinMonitoring, DataProvider
 from LaptopControlPanel.System.Hdd import HddManager
 
 ####################################################################################################
@@ -19,10 +32,50 @@ from .ui.FanPage_ui import Ui_form
 
 ####################################################################################################
 
+_module_logger = logging.getLogger(__name__)
+
+####################################################################################################
+
+class HddTemperatureDataProvider(DataProvider):
+
+    __name__ = 'HDD Temperature'
+    __dtype__ = np.uint
+
+    ##############################################
+
+    def __init__(self):
+        self._hdd_manager = HddManager()
+
+    ##############################################
+
+    def __call__(self):
+        return self._hdd_manager.temperature()
+
+####################################################################################################
+
+class FanSpeedDataProvider(DataProvider):
+
+    __name__ = 'Fan Speed'
+    __dtype__ = np.uint
+
+    ##############################################
+
+    def __init__(self):
+        self._fan_manager = FanManager()
+
+    ##############################################
+
+    def __call__(self):
+        return self._fan_manager.speed
+
+####################################################################################################
+
 class FanPage(PageBase):
 
     __page_name__ = 'fan'
     __page_title__ = 'FAN'
+
+    _logger = _module_logger.getChild('FanPage')
 
     ##############################################
 
@@ -33,19 +86,42 @@ class FanPage(PageBase):
         self._form = Ui_form()
         self._form.setupUi(self)
 
-        for widget in (self._form.fan_level_spin_box,
-                       self._form.fan_level_slider,
+        self._hdd_manager = HddManager()
+        self._fan_manager = FanManager()
+
+        self._monitoring = None
+
+        self._init_ui()
+        self._init_connection()
+        self.refresh()
+
+    ##############################################
+
+    def _init_ui(self):
+
+        form = self._form
+
+        for widget in (form.fan_level_spin_box,
+                       form.fan_level_slider,
                        ):
             widget.setMinimum(1)
             widget.setMaximum(7)
             widget.setSingleStep(1)
             # widget.setPageStep(1)
 
-        self._hdd_manager = HddManager()
-        self._fan_manager = FanManager()
-        self.refresh()
+        self._figure = Figure()
+        self._axes_left = self._figure.add_subplot(1, 1, 1)
+        self._axes_right = self._axes_left.twinx()
 
-        self._init_connection()
+
+        self._canvas = FigureCanvas(self._figure)
+        self._canvas.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self._canvas.setFocus()
+
+        self._matplotlib_toolbar = NavigationToolbar(self._canvas, self)
+
+        for widget in self._canvas, self._matplotlib_toolbar:
+             form.graphic_layout.addWidget(widget)
 
     ##############################################
 
@@ -57,6 +133,7 @@ class FanPage(PageBase):
         form.auto_radio_button.toggled.connect(self._on_fan_level_change)
         form.disengaged_radio_button.toggled.connect(self._on_fan_level_change)
         form.full_speed_radio_button.toggled.connect(self._on_fan_level_change)
+        form.monitor_check_box.stateChanged.connect(self._on_monitor_state_changed)
 
     ##############################################
 
@@ -79,7 +156,34 @@ class FanPage(PageBase):
                 elif level == 'disengaged':
                     form.disengaged_radio_button.setChecked(True)
                 elif level == 'full-speed':
-                    form.full_speed_radio_button(True)
+                    form.full_speed_radio_button.setChecked(True)
+
+        if self._monitoring is not None and self._monitoring.data_frame:
+            self._logger.info("Refresh plot")
+
+            time_slot = self._monitoring.time_slot
+
+            axes = self._axes_left
+            axes.clear()        
+            axes.grid(True)
+            # times = np.arange(self._monitoring.period)
+            times = np.arange(time_slot)
+            axes.set_xlabel('Times')
+
+            data_provider_name = 'Fan Speed'
+            axes.plot(times, self._monitoring.data_frame[data_provider_name][:time_slot], 'green')
+            axes.set_ylabel(data_provider_name)
+            axes.set_ylim(0, 6000)
+            # self._figure.add_axes(self._monitoring._data_frame.plot()) # segfault
+
+            data_provider_name = 'HDD Temperature'
+            axes = self._axes_right
+            axes.clear()        
+            axes.set_ylabel(data_provider_name)
+            axes.set_ylim(0, 60)
+            axes.plot(times, self._monitoring.data_frame[data_provider_name][:time_slot], 'red')
+
+            self._canvas.draw()
 
     ##############################################
 
@@ -99,6 +203,22 @@ class FanPage(PageBase):
         #     level = 'full-speed'
         self._fan_manager.level = level
         self.refresh(refresh_level=False)
+
+    ##############################################
+
+    def _on_monitor_state_changed(self, state):
+
+        if state:
+            data_providers = (HddTemperatureDataProvider, FanSpeedDataProvider)
+            self._monitoring = RoundRobinMonitoring(time_resolution=20, #s
+                                                    time_period=500,
+                                                    data_providers=data_providers)
+            self._monitoring.start()
+            # self.refresh()
+        else:
+            if self._monitoring:
+                self._monitoring.stop()
+                self._monitoring = None
 
 ####################################################################################################
 # 

@@ -26,6 +26,7 @@ class MainWindow(MainWindowBase):
 
         super(MainWindow, self).__init__(title='LaptopControlPanel')
 
+        self._init_action()
         self._init_ui()
 
     ##############################################
@@ -36,9 +37,23 @@ class MainWindow(MainWindowBase):
 
     ##############################################
 
+    def _init_action(self):
+
+        self._refresh_action = QtGui.QAction("&Refresh",
+                                             self,
+                                             triggered=self.refresh,
+                                             shortcut='Ctrl-R',
+                                             shortcutContext=QtCore.Qt.ApplicationShortcut,
+                                             )
+
+    ##############################################
+
     def _init_ui(self):
 
         self.statusBar()
+
+        self._tool_bar = self.addToolBar('Tools')
+        self._tool_bar.addAction(self._refresh_action)
 
         central_widget = QtGui.QWidget(self)
         self.setCentralWidget(central_widget)
@@ -69,7 +84,7 @@ class MainWindow(MainWindowBase):
         for widget in self._list_widget, self._stacked_widget:
             horizontal_Layout.addWidget(widget)
 
-        self._application.timer.timeout.connect(self._refresh)
+        self._application.timer.timeout.connect(self.refresh)
 
         self._translate_ui()
 
@@ -98,7 +113,7 @@ class MainWindow(MainWindowBase):
 
     ##############################################
 
-    def _refresh(self):
+    def refresh(self):
 
         self._stacked_widget.currentWidget().refresh()
 

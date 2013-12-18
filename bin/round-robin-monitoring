@@ -1,0 +1,116 @@
+#! /usr/bin/env python
+# -*- Python -*-
+
+####################################################################################################
+# 
+# LaptopControlPanel - A Laptop Control Panel
+# Copyright (C) 2013 Fabrice Salvaire
+# 
+####################################################################################################
+
+####################################################################################################
+#
+# Logging
+#
+
+import LaptopControlPanel.Logging.Logging as Logging
+
+logger = Logging.setup_logging('round-robin-monitoring')
+
+####################################################################################################
+
+import argparse
+import sys
+import time
+
+import numpy as np
+
+####################################################################################################
+
+from LaptopControlPanel.Acpi.Fan import FanManager
+from LaptopControlPanel.Monitoring.RoundRobinMonitoring import RoundRobinMonitoring, DataProvider
+from LaptopControlPanel.System.Hdd import HddManager
+
+####################################################################################################
+#
+# Options
+#
+
+argument_parser = argparse.ArgumentParser(description='Round Robin Monitoring',
+                                          formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+argument_parser.add_argument('--time-resolution',
+                             default=10,
+                             type=int,
+                             help='time resolution [s]')
+
+argument_parser.add_argument('--time-period',
+                             default=120,
+                             type=int,
+                             help='time perdiod, as a multiple of time resolution')
+
+args = argument_parser.parse_args()
+
+####################################################################################################
+
+class HddTemperatureDataProvider(DataProvider):
+
+    __name__ = 'HDD temperature'
+    __dtype__ = np.uint
+
+    ##############################################
+
+    def __init__(self):
+
+        self._hdd_manager = HddManager()
+
+    ##############################################
+
+    def __call__(self):
+
+        return self._hdd_manager.temperature()
+
+####################################################################################################
+
+class FanSpeedDataProvider(DataProvider):
+
+    __name__ = 'Fan Speed'
+    __dtype__ = np.uint
+
+    ##############################################
+
+    def __init__(self):
+
+        self._fan_manager = FanManager()
+
+    ##############################################
+
+    def __call__(self):
+
+        return self._fan_manager.speed
+
+####################################################################################################
+
+data_providers = (HddTemperatureDataProvider, FanSpeedDataProvider)
+
+round_robin_monitoring = RoundRobinMonitoring(time_resolution=args.time_resolution,
+                                              time_period=args.time_period,
+                                              data_providers=data_providers)
+
+try:
+    round_robin_monitoring.start()
+    
+    # Main Thread loop
+    while True:
+        time.sleep(60)
+        if not round_robin_monitoring.is_alive():
+            raise SystemExit
+
+except (KeyboardInterrupt, SystemExit):
+    sys.exit(1)
+
+####################################################################################################
+# 
+# End
+# 
+####################################################################################################

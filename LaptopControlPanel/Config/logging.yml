@@ -60,6 +60,12 @@ loggers:
     handlers: [console]
     propagate: no
 
+  round-robin-monitoring:
+    level: DEBUG
+    #level: INFO
+    handlers: [console]
+    propagate: no
+
 ##################################################
 #
 # Modules

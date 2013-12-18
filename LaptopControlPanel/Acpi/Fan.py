@@ -26,7 +26,7 @@ class FanManager(object):
 
     def __init__(self):
 
-        self._load_thinkpad_acpi_module()
+        #!# self._load_thinkpad_acpi_module()
         self._get_state()
 
     ##############################################
@@ -49,6 +49,8 @@ class FanManager(object):
     ##############################################
 
     def _load_thinkpad_acpi_module(self):
+
+        # /!\ This code has side-effect on keyboard (AltGr)
 
         self._logger.debug("Load module thinkpad-acpi")
         rc = subprocess.check_call(['/sbin/rmmod', 'thinkpad-acpi'])

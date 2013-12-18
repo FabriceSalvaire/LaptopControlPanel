@@ -1,7 +1,7 @@
 *_ui.py
-LaptopControlPanel/Version.py
-build
-not-yet-included
 .git
 .gitignore
+LaptopControlPanel/Version.py
+build
 doc/sphinx/old-api
+not-yet-included

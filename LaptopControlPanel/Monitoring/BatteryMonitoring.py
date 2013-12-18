@@ -18,9 +18,13 @@ from LaptopControlPanel.Tools.SleepThread import SleepThread
 
 ####################################################################################################
 
+_module_logger = logging.getLogger(__name__)
+
+####################################################################################################
+
 class BatteryMonitor(SleepThread):
 
-    _logger = logging.getLogger(__name__ + '.BatteryMonitor')
+    _logger = _module_logger.getChild('BatteryMonitor')
 
     ##############################################
 
