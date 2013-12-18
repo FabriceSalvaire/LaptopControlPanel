@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LaptopControlPanel.GUI.Pages.NetworkDevicePage &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for LaptopControlPanel.GUI.Pages.NetworkDevicePage</h1><div class="highlight"><pre>
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
+<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtCore</span><span class="p">,</span> <span class="n">QtGui</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">.Page</span> <span class="kn">import</span> <span class="n">PageBase</span>
+<span class="kn">from</span> <span class="nn">LaptopControlPanel.System.NetworkDevice</span> <span class="kn">import</span> <span class="n">NetworkDevices</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">.ui.NetworkDevicePage_ui</span> <span class="kn">import</span> <span class="n">Ui_form</span>
+<span class="kn">from</span> <span class="nn">LaptopControlPanel.GUI.Widgets.RowLayoutManager</span> <span class="kn">import</span> <span class="n">RowLayoutManager</span>
+
+<span class="c">####################################################################################################</span>
+
+<div class="viewcode-block" id="NetworkDevicePage"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/NetworkDevicePage.html#LaptopControlPanel.GUI.Pages.NetworkDevicePage.NetworkDevicePage">[docs]</a><span class="k">class</span> <span class="nc">NetworkDevicePage</span><span class="p">(</span><span class="n">PageBase</span><span class="p">):</span>
+
+    <span class="n">__page_name__</span> <span class="o">=</span> <span class="s">&#39;network_device&#39;</span>
+    <span class="n">__page_title__</span> <span class="o">=</span> <span class="s">&#39;Network device&#39;</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">NetworkDevicePage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_form</span> <span class="o">=</span> <span class="n">Ui_form</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_form</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_network_devices</span> <span class="o">=</span> <span class="n">NetworkDevices</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+    <span class="c">##############################################</span>
+
+<div class="viewcode-block" id="NetworkDevicePage.refresh"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/NetworkDevicePage.html#LaptopControlPanel.GUI.Pages.NetworkDevicePage.NetworkDevicePage.refresh">[docs]</a>    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form</span>
+
+        <span class="n">row_layout_manager</span> <span class="o">=</span> <span class="n">RowLayoutManager</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">grid_layout</span><span class="p">)</span>
+        <span class="c"># Fixme: clear layout</span>
+
+        <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_network_devices</span><span class="o">.</span><span class="n">itervalues</span><span class="p">():</span>
+            <span class="n">type_label</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="n">name_label</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="n">widgets</span> <span class="o">=</span> <span class="p">[</span><span class="n">type_label</span><span class="p">,</span> <span class="n">name_label</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">device</span><span class="o">.</span><span class="n">hard</span><span class="p">:</span>
+                <span class="n">hard_lock_label</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_application</span><span class="o">.</span><span class="n">icon_loader</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="s">&#39;object-locked&#39;</span><span class="p">,</span> <span class="n">icon_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+                <span class="c"># hard_lock_label.setText(&#39;hard locked&#39;)</span>
+                <span class="n">hard_lock_label</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">icon</span><span class="o">.</span><span class="n">pixmap</span><span class="p">(</span><span class="n">icon</span><span class="o">.</span><span class="n">availableSizes</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="n">widgets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hard_lock_label</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">soft_lock_check_box</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="n">soft_lock_check_box</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#39;.soft_lock_check_box&#39;</span><span class="p">)</span>
+                <span class="n">soft_lock_check_box</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="ow">not</span> <span class="n">device</span><span class="o">.</span><span class="n">soft</span><span class="p">)</span>
+                <span class="n">soft_lock_check_box</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_soft_lock_state_changed</span><span class="p">)</span>
+                <span class="n">widgets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">soft_lock_check_box</span><span class="p">)</span>
+            <span class="n">row_layout_manager</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">widgets</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="NetworkDevicePage._soft_lock_state_changed"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/NetworkDevicePage.html#LaptopControlPanel.GUI.Pages.NetworkDevicePage.NetworkDevicePage._soft_lock_state_changed">[docs]</a>    <span class="k">def</span> <span class="nf">_soft_lock_state_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+
+        <span class="n">sender</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">()</span>
+        <span class="n">device_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sender</span><span class="o">.</span><span class="n">objectName</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_network_devices</span><span class="p">[</span><span class="n">device_name</span><span class="p">]</span>
+        <span class="n">device</span><span class="o">.</span><span class="n">soft</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span><span class="p">)</span>
+
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># End</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

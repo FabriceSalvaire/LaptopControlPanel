@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LaptopControlPanel.GUI.MainWindow &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for LaptopControlPanel.GUI.MainWindow</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
+<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtCore</span><span class="p">,</span> <span class="n">QtGui</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">.MainWindowBase</span> <span class="kn">import</span> <span class="n">MainWindowBase</span>
+<span class="c"># from .Pages.Page import PageMetaClass</span>
+
+<span class="c">####################################################################################################</span>
+
+<div class="viewcode-block" id="MainWindow"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow">[docs]</a><span class="k">class</span> <span class="nc">MainWindow</span><span class="p">(</span><span class="n">MainWindowBase</span><span class="p">):</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">MainWindow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;LaptopControlPanel&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_ui</span><span class="p">()</span>
+
+    <span class="c">##############################################</span>
+
+<div class="viewcode-block" id="MainWindow.init_menu"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow.init_menu">[docs]</a>    <span class="k">def</span> <span class="nf">init_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">MainWindow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">init_menu</span><span class="p">()</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="MainWindow._init_ui"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow._init_ui">[docs]</a>    <span class="k">def</span> <span class="nf">_init_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">statusBar</span><span class="p">()</span>
+
+        <span class="n">central_widget</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
+        <span class="n">horizontal_Layout</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QListWidget</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="o">.</span><span class="n">setMaximumSize</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">16777215</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stacked_widget</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QStackedWidget</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="o">.</span><span class="n">currentRowChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stacked_widget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">)</span>
+
+        <span class="kn">from</span> <span class="nn">.Pages.NetworkDevicePage</span> <span class="kn">import</span> <span class="n">NetworkDevicePage</span>
+        <span class="kn">from</span> <span class="nn">.Pages.PowerSourcePage</span> <span class="kn">import</span> <span class="n">PowerSourcePage</span>
+        <span class="kn">from</span> <span class="nn">.Pages.FanPage</span> <span class="kn">import</span> <span class="n">FanPage</span>
+        <span class="kn">from</span> <span class="nn">.Pages.GpuPage</span> <span class="kn">import</span> <span class="n">GpuPage</span>
+        <span class="c"># for page_class in PageMetaClass.pages.itervalues():</span>
+        <span class="k">for</span> <span class="n">page_class</span> <span class="ow">in</span> <span class="p">(</span><span class="n">NetworkDevicePage</span><span class="p">,</span>
+                           <span class="n">PowerSourcePage</span><span class="p">,</span>
+                           <span class="n">FanPage</span><span class="p">,</span>
+                           <span class="n">GpuPage</span><span class="p">,</span>
+                           <span class="p">):</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QListWidgetItem</span><span class="p">(</span><span class="n">page_class</span><span class="o">.</span><span class="n">__page_title__</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">page_class</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_stacked_widget</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+            
+        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stacked_widget</span><span class="p">:</span>
+            <span class="n">horizontal_Layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_application</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_refresh</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_translate_ui</span><span class="p">()</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="MainWindow._translate_ui"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow._translate_ui">[docs]</a>    <span class="k">def</span> <span class="nf">_translate_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">pass</span>
+        <span class="c"># self.foo.setText(self.translate(&quot;...&quot;))</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="MainWindow.closeEvent"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow.closeEvent">[docs]</a>    <span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+        <span class="n">tray_icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_application</span><span class="o">.</span><span class="n">tray_icon</span>
+        <span class="k">if</span> <span class="n">tray_icon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">tray_icon</span><span class="o">.</span><span class="n">isVisible</span><span class="p">():</span>
+            <span class="c"># Fixme: Config.Title</span>
+            <span class="c"># QtGui.QMessageBox.information(self, &quot;Laptop Control Panel&quot;,</span>
+            <span class="c">#                               &quot;The program will keep running in the system tray. To &quot;</span>
+            <span class="c">#                               &quot;terminate the program, choose &lt;b&gt;Quit&lt;/b&gt; in the &quot;</span>
+            <span class="c">#                               &quot;context menu of the system tray entry.&quot;)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_application</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="MainWindow._refresh"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow._refresh">[docs]</a>    <span class="k">def</span> <span class="nf">_refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stacked_widget</span><span class="o">.</span><span class="n">currentWidget</span><span class="p">()</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+<span class="c">####################################################################################################</span>
+<span class="c">#</span>
+<span class="c"># End</span>
+<span class="c">#</span>
+<span class="c">####################################################################################################</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

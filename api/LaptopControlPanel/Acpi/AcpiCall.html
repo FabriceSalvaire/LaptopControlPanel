@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.1.1. AcpiCall &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="2.1. Acpi" href="../Acpi.html" />
+    <link rel="next" title="2.1.2. Fan" href="Fan.html" />
+    <link rel="prev" title="2.1. Acpi" href="../Acpi.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Fan.html" title="2.1.2. Fan"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Acpi.html" title="2.1. Acpi"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Acpi.html" accesskey="U">2.1. <tt class="docutils literal"><span class="pre">Acpi</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-LaptopControlPanel.Acpi.AcpiCall">
+<span id="acpicall"></span><h1>2.1.1. <tt class="xref py py-mod docutils literal"><span class="pre">AcpiCall</span></tt><a class="headerlink" href="#module-LaptopControlPanel.Acpi.AcpiCall" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Acpi.AcpiCall.</tt><tt class="descname">AcpiCallArgument</tt><big>(</big><em>name</em>, <em>upper_bit</em>, <em>lower_bit</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallArgument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument._check_value">
+<tt class="descname">_check_value</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallArgument._check_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument._check_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument.decode">
+<tt class="descname">decode</tt><big>(</big><em>double_word</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallArgument.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument.decode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument.encode">
+<tt class="descname">encode</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallArgument.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument.encode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Acpi.AcpiCall.</tt><tt class="descname">AcpiCallArguments</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallArguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="attribute">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments._logger">
+<tt class="descname">_logger</tt><em class="property"> = &lt;logging.Logger object at 0x42b7190&gt;</em><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments._logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments.decode">
+<tt class="descname">decode</tt><big>(</big><em>double_word</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallArguments.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments.decode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments.encode">
+<tt class="descname">encode</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallArguments.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments.encode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Acpi.AcpiCall.</tt><tt class="descname">AcpiCallDevice</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallDevice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="attribute">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._acpi_call_device">
+<tt class="descname">_acpi_call_device</tt><em class="property"> = '/proc/acpi/call'</em><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._acpi_call_device" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._acpi_call_device_exists">
+<tt class="descname">_acpi_call_device_exists</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallDevice._acpi_call_device_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._acpi_call_device_exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._load_acpi_call_module">
+<tt class="descname">_load_acpi_call_module</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallDevice._load_acpi_call_module"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._load_acpi_call_module" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._logger">
+<tt class="descname">_logger</tt><em class="property"> = &lt;logging.Logger object at 0x42b7090&gt;</em><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice.call">
+<tt class="descname">call</tt><big>(</big><em>call_string</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallDevice.call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice.call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice.define_function">
+<tt class="descname">define_function</tt><big>(</big><em>name</em>, <em>input_arguments</em>, <em>output_arguments</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallDevice.define_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice.define_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallFunction">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Acpi.AcpiCall.</tt><tt class="descname">AcpiCallFunction</tt><big>(</big><em>acpi_call_device</em>, <em>acpi_path</em>, <em>input_arguments</em>, <em>output_arguments</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="attribute">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallFunction._logger">
+<tt class="descname">_logger</tt><em class="property"> = &lt;logging.Logger object at 0x42b7110&gt;</em><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallFunction._logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.AcpiCall.AcpiCallFunction.call">
+<tt class="descname">call</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/AcpiCall.html#AcpiCallFunction.call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.AcpiCall.AcpiCallFunction.call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Acpi.html"
+                        title="previous chapter">2.1. <tt class="docutils literal"><span class="pre">Acpi</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Fan.html"
+                        title="next chapter">2.1.2. <tt class="docutils literal"><span class="pre">Fan</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/api/LaptopControlPanel/Acpi/AcpiCall.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Fan.html" title="2.1.2. Fan"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Acpi.html" title="2.1. Acpi"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Acpi.html" >2.1. <tt class="docutils literal"><span class="pre">Acpi</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

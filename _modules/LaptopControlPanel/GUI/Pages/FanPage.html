@@ -1,0 +1,201 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LaptopControlPanel.GUI.Pages.FanPage &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for LaptopControlPanel.GUI.Pages.FanPage</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
+<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">.Page</span> <span class="kn">import</span> <span class="n">PageBase</span>
+<span class="kn">from</span> <span class="nn">LaptopControlPanel.Acpi.Fan</span> <span class="kn">import</span> <span class="n">FanManager</span>
+<span class="kn">from</span> <span class="nn">LaptopControlPanel.System.Hdd</span> <span class="kn">import</span> <span class="n">HddManager</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">.ui.FanPage_ui</span> <span class="kn">import</span> <span class="n">Ui_form</span>
+
+<span class="c">####################################################################################################</span>
+
+<div class="viewcode-block" id="FanPage"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/FanPage.html#LaptopControlPanel.GUI.Pages.FanPage.FanPage">[docs]</a><span class="k">class</span> <span class="nc">FanPage</span><span class="p">(</span><span class="n">PageBase</span><span class="p">):</span>
+
+    <span class="n">__page_name__</span> <span class="o">=</span> <span class="s">&#39;fan&#39;</span>
+    <span class="n">__page_title__</span> <span class="o">=</span> <span class="s">&#39;FAN&#39;</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">FanPage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_form</span> <span class="o">=</span> <span class="n">Ui_form</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_form</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_form</span><span class="o">.</span><span class="n">fan_level_spin_box</span><span class="p">,</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">_form</span><span class="o">.</span><span class="n">fan_level_slider</span><span class="p">,</span>
+                       <span class="p">):</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c"># widget.setPageStep(1)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hdd_manager</span> <span class="o">=</span> <span class="n">HddManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span> <span class="o">=</span> <span class="n">FanManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_connection</span><span class="p">()</span>
+
+    <span class="c">##############################################</span>
+
+<div class="viewcode-block" id="FanPage._init_connection"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/FanPage.html#LaptopControlPanel.GUI.Pages.FanPage.FanPage._init_connection">[docs]</a>    <span class="k">def</span> <span class="nf">_init_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form</span>
+
+        <span class="n">form</span><span class="o">.</span><span class="n">fan_level_spin_box</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_fan_level_change</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">auto_radio_button</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_fan_level_change</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">disengaged_radio_button</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_fan_level_change</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">full_speed_radio_button</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_fan_level_change</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="FanPage.refresh"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/FanPage.html#LaptopControlPanel.GUI.Pages.FanPage.FanPage.refresh">[docs]</a>    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">refresh_level</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+
+        <span class="n">form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form</span>
+
+        <span class="n">form</span><span class="o">.</span><span class="n">hdd_temperature_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hdd_manager</span><span class="o">.</span><span class="n">temperature</span><span class="p">())</span> <span class="o">+</span> <span class="s">u&#39; °C&#39;</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">fan_speed_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; rpm&#39;</span><span class="p">)</span>
+      
+        <span class="k">if</span> <span class="n">refresh_level</span><span class="p">:</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span><span class="o">.</span><span class="n">level</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">level</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+                <span class="n">form</span><span class="o">.</span><span class="n">fan_level_spin_box</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+                <span class="n">form</span><span class="o">.</span><span class="n">level_radio_button</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="s">&#39;auto&#39;</span><span class="p">:</span>
+                    <span class="n">form</span><span class="o">.</span><span class="n">auto_radio_button</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">level</span> <span class="o">==</span> <span class="s">&#39;disengaged&#39;</span><span class="p">:</span>
+                    <span class="n">form</span><span class="o">.</span><span class="n">disengaged_radio_button</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">level</span> <span class="o">==</span> <span class="s">&#39;full-speed&#39;</span><span class="p">:</span>
+                    <span class="n">form</span><span class="o">.</span><span class="n">full_speed_radio_button</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="FanPage._on_fan_level_change"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/FanPage.html#LaptopControlPanel.GUI.Pages.FanPage.FanPage._on_fan_level_change">[docs]</a>    <span class="k">def</span> <span class="nf">_on_fan_level_change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form</span>
+
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">level_radio_button</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">fan_level_spin_box</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">form</span><span class="o">.</span><span class="n">auto_radio_button</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="s">&#39;auto&#39;</span>
+        <span class="k">elif</span> <span class="n">form</span><span class="o">.</span><span class="n">disengaged_radio_button</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="s">&#39;disengaged&#39;</span>
+        <span class="k">elif</span> <span class="n">form</span><span class="o">.</span><span class="n">full_speed_radio_button</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="s">&#39;full-speed&#39;</span>
+        <span class="c"># if level == 8:</span>
+        <span class="c">#     level = &#39;full-speed&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">refresh_level</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># End</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.4.1. SqlAlchemyBase &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="2.4. DataBase" href="../DataBase.html" />
+    <link rel="next" title="2.4.2. SqliteDataBase" href="SqliteDataBase.html" />
+    <link rel="prev" title="2.4. DataBase" href="../DataBase.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="SqliteDataBase.html" title="2.4.2. SqliteDataBase"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../DataBase.html" title="2.4. DataBase"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../DataBase.html" accesskey="U">2.4. <tt class="docutils literal"><span class="pre">DataBase</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-LaptopControlPanel.DataBase.SqlAlchemyBase">
+<span id="sqlalchemybase"></span><h1>2.4.1. <tt class="xref py py-mod docutils literal"><span class="pre">SqlAlchemyBase</span></tt><a class="headerlink" href="#module-LaptopControlPanel.DataBase.SqlAlchemyBase" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.ColumnDateWidthFactory">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.DataBase.SqlAlchemyBase.</tt><tt class="descname">ColumnDateWidthFactory</tt><big>(</big><em>factor=1</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#ColumnDateWidthFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.ColumnDateWidthFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.ColumnWidthFactory" title="LaptopControlPanel.DataBase.SqlAlchemyBase.ColumnWidthFactory"><tt class="xref py py-class docutils literal"><span class="pre">LaptopControlPanel.DataBase.SqlAlchemyBase.ColumnWidthFactory</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.ColumnWidthFactory">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.DataBase.SqlAlchemyBase.</tt><tt class="descname">ColumnWidthFactory</tt><big>(</big><em>template='M'</em>, <em>factor=1</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#ColumnWidthFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.ColumnWidthFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.DataBase.SqlAlchemyBase.</tt><tt class="descname">SqlRow</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlRow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="classmethod">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.column_names">
+<em class="property">classmethod </em><tt class="descname">column_names</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlRow.column_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.column_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.column_values">
+<tt class="descname">column_values</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlRow.column_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.column_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.get_column">
+<em class="property">classmethod </em><tt class="descname">get_column</tt><big>(</big><em>column</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlRow.get_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.get_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.get_column_dict">
+<tt class="descname">get_column_dict</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlRow.get_column_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.get_column_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.get_field_title">
+<em class="property">classmethod </em><tt class="descname">get_field_title</tt><big>(</big><em>field</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlRow.get_field_title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.get_field_title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.get_field_witdh">
+<em class="property">classmethod </em><tt class="descname">get_field_witdh</tt><big>(</big><em>field</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlRow.get_field_witdh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow.get_field_witdh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.DataBase.SqlAlchemyBase.</tt><tt class="descname">SqlTable</tt><big>(</big><em>database</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="attribute">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.ROW_CLASS">
+<tt class="descname">ROW_CLASS</tt><em class="property"> = None</em><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.ROW_CLASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.add">
+<tt class="descname">add</tt><big>(</big><em>row</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.add_new_row">
+<tt class="descname">add_new_row</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable.add_new_row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.add_new_row" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.all">
+<tt class="descname">all</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable.all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.commit">
+<tt class="descname">commit</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable.commit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.commit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.model">
+<tt class="descname">model</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable.model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.query">
+<tt class="descname">query</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable.query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.select_by">
+<tt class="descname">select_by</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable.select_by"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.select_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.select_by_where_clause">
+<tt class="descname">select_by_where_clause</tt><big>(</big><em>where_clause</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTable.select_by_where_clause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable.select_by_where_clause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.DataBase.SqlAlchemyBase.</tt><tt class="descname">SqlTableModel</tt><big>(</big><em>sql_table</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtCore.QAbstractTableModel</span></tt></p>
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel._get_row_class">
+<tt class="descname">_get_row_class</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel._get_row_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel._get_row_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel._sort">
+<tt class="descname">_sort</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel._sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel._sort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.all">
+<tt class="descname">all</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.columnCount">
+<tt class="descname">columnCount</tt><big>(</big><em>index=&lt;PyQt4.QtCore.QModelIndex object at 0x4d730c0&gt;</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.columnCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.columnCount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.column_index">
+<tt class="descname">column_index</tt><big>(</big><em>column</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.column_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.column_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.data">
+<tt class="descname">data</tt><big>(</big><em>index</em>, <em>role=0</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.headerData">
+<tt class="descname">headerData</tt><big>(</big><em>section</em>, <em>orientation</em>, <em>role=0</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.headerData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.headerData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.rowCount">
+<tt class="descname">rowCount</tt><big>(</big><em>index=&lt;PyQt4.QtCore.QModelIndex object at 0x4d73130&gt;</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.rowCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.rowCount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.row_class">
+<tt class="descname">row_class</tt><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.row_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.select_by">
+<tt class="descname">select_by</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.select_by"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.select_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.select_by_where_clause">
+<tt class="descname">select_by_where_clause</tt><big>(</big><em>where_clause</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.select_by_where_clause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.select_by_where_clause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.set_column_widths">
+<tt class="descname">set_column_widths</tt><big>(</big><em>table_wiew</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.set_column_widths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.set_column_widths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.sort">
+<tt class="descname">sort</tt><big>(</big><em>column_index</em>, <em>order</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.sort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.sorted">
+<tt class="descname">sorted</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/DataBase/SqlAlchemyBase.html#SqlTableModel.sorted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTableModel.sorted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../DataBase.html"
+                        title="previous chapter">2.4. <tt class="docutils literal"><span class="pre">DataBase</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="SqliteDataBase.html"
+                        title="next chapter">2.4.2. <tt class="docutils literal"><span class="pre">SqliteDataBase</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/api/LaptopControlPanel/DataBase/SqlAlchemyBase.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="SqliteDataBase.html" title="2.4.2. SqliteDataBase"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../DataBase.html" title="2.4. DataBase"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../DataBase.html" >2.4. <tt class="docutils literal"><span class="pre">DataBase</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

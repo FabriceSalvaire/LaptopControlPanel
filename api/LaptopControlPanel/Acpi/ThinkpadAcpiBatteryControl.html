@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.1.4. ThinkpadAcpiBatteryControl &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="2.1. Acpi" href="../Acpi.html" />
+    <link rel="next" title="2.2. Application" href="../Application.html" />
+    <link rel="prev" title="2.1.3. Gpu" href="Gpu.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Application.html" title="2.2. Application"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Gpu.html" title="2.1.3. Gpu"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Acpi.html" accesskey="U">2.1. <tt class="docutils literal"><span class="pre">Acpi</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl">
+<span id="thinkpadacpibatterycontrol"></span><h1>2.1.4. <tt class="xref py py-mod docutils literal"><span class="pre">ThinkpadAcpiBatteryControl</span></tt><a class="headerlink" href="#module-LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl" title="Permalink to this headline">¶</a></h1>
+<p>This module provides an interface to ACPI Calls to control Thinkpad Laptop Battery.</p>
+<p>These ACPI calls permits:
+* to set the start and stop capacity threshold to charge the battery,
+* to switch on battery when AC power is plugged,
+* to setup a &#8220;peak shift&#8221; procedure.</p>
+<p>(As far I know) The concept of &#8220;peak shift&#8221; is to switch temporarily electrical devices on battery
+during a power peak consumption period so as to unload the grid.  This power management strategy is
+relevant for country like Japan, where these peak periods represent a risk of electrical black out.</p>
+<dl class="class">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.</tt><tt class="descname">BatteryControl</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="attribute">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._asl_base">
+<tt class="descname">_asl_base</tt><em class="property"> = '\\_SB.PCI0.LPC.EC.HKEY'</em><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._asl_base" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._check_battery_id_for_reading">
+<tt class="descname">_check_battery_id_for_reading</tt><big>(</big><em>battery</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl._check_battery_id_for_reading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._check_battery_id_for_reading" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._check_charge_threshold">
+<tt class="descname">_check_charge_threshold</tt><big>(</big><em>threshold=None</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl._check_charge_threshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._check_charge_threshold" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._check_error_status">
+<tt class="descname">_check_error_status</tt><big>(</big><em>result</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl._check_error_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._check_error_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._define_function">
+<tt class="descname">_define_function</tt><big>(</big><em>name</em>, <em>input_arguments</em>, <em>output_arguments</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl._define_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl._define_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.either_both_battery">
+<tt class="descname">either_both_battery</tt><em class="property"> = 0</em><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.either_both_battery" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_force_discharge">
+<tt class="descname">get_force_discharge</tt><big>(</big><em>battery=1</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.get_force_discharge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_force_discharge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_inhibit_charge">
+<tt class="descname">get_inhibit_charge</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.get_inhibit_charge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_inhibit_charge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_peak_shift_state">
+<tt class="descname">get_peak_shift_state</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.get_peak_shift_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_peak_shift_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_start_threshold">
+<tt class="descname">get_start_threshold</tt><big>(</big><em>battery=1</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.get_start_threshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_start_threshold" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_stop_threshold">
+<tt class="descname">get_stop_threshold</tt><big>(</big><em>battery=1</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.get_stop_threshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.get_stop_threshold" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.main_battery">
+<tt class="descname">main_battery</tt><em class="property"> = 1</em><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.main_battery" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.secondary_battery">
+<tt class="descname">secondary_battery</tt><em class="property"> = 2</em><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.secondary_battery" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_force_discharge">
+<tt class="descname">set_force_discharge</tt><big>(</big><em>battery=1</em>, <em>force_discharge=True</em>, <em>break_by_ac_detaching=False</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.set_force_discharge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_force_discharge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_inhibit_charge">
+<tt class="descname">set_inhibit_charge</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.set_inhibit_charge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_inhibit_charge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_peak_shift_state">
+<tt class="descname">set_peak_shift_state</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.set_peak_shift_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_peak_shift_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_start_threshold">
+<tt class="descname">set_start_threshold</tt><big>(</big><em>battery=1</em>, <em>threshold=None</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.set_start_threshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_start_threshold" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_stop_threshold">
+<tt class="descname">set_stop_threshold</tt><big>(</big><em>battery=1</em>, <em>threshold=None</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.html#BatteryControl.set_stop_threshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Acpi.ThinkpadAcpiBatteryControl.BatteryControl.set_stop_threshold" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Gpu.html"
+                        title="previous chapter">2.1.3. <tt class="docutils literal"><span class="pre">Gpu</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Application.html"
+                        title="next chapter">2.2. <tt class="docutils literal"><span class="pre">Application</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/api/LaptopControlPanel/Acpi/ThinkpadAcpiBatteryControl.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Application.html" title="2.2. Application"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Gpu.html" title="2.1.3. Gpu"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Acpi.html" >2.1. <tt class="docutils literal"><span class="pre">Acpi</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.7.2. BatteryStatusDataBase &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="2.7. Monitoring" href="../Monitoring.html" />
+    <link rel="next" title="2.8. System" href="../System.html" />
+    <link rel="prev" title="2.7.1. BatteryMonitoring" href="BatteryMonitoring.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../System.html" title="2.8. System"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="BatteryMonitoring.html" title="2.7.1. BatteryMonitoring"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Monitoring.html" accesskey="U">2.7. <tt class="docutils literal"><span class="pre">Monitoring</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-LaptopControlPanel.Monitoring.BatteryStatusDataBase">
+<span id="batterystatusdatabase"></span><h1>2.7.2. <tt class="xref py py-mod docutils literal"><span class="pre">BatteryStatusDataBase</span></tt><a class="headerlink" href="#module-LaptopControlPanel.Monitoring.BatteryStatusDataBase" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusDataBase">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Monitoring.BatteryStatusDataBase.</tt><tt class="descname">BatteryStatusDataBase</tt><big>(</big><em>filename</em>, <em>echo=False</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/BatteryStatusDataBase.html#BatteryStatusDataBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusDataBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../DataBase/SqliteDataBase.html#LaptopControlPanel.DataBase.SqliteDataBase.SqliteDataBase" title="LaptopControlPanel.DataBase.SqliteDataBase.SqliteDataBase"><tt class="xref py py-class docutils literal"><span class="pre">LaptopControlPanel.DataBase.SqliteDataBase.SqliteDataBase</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Monitoring.BatteryStatusDataBase.</tt><tt class="descname">BatteryStatusRow</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/BatteryStatusDataBase.html#BatteryStatusRow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.Base</span></tt>, <a class="reference internal" href="../DataBase/SqlAlchemyBase.html#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow" title="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow"><tt class="xref py py-class docutils literal"><span class="pre">LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow</span></tt></a></p>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <tt class="docutils literal"><span class="pre">kwargs</span></tt>.</p>
+<p>Only keys that are present as
+attributes of the instance&#8217;s class are allowed. These could be,
+for example, any mapped columns or relationships.</p>
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow._sa_class_manager">
+<tt class="descname">_sa_class_manager</tt><em class="property"> = &lt;ClassManager of &lt;class 'LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow'&gt; at 59cc320&gt;</em><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow._sa_class_manager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.battery_capacity">
+<tt class="descname">battery_capacity</tt><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.battery_capacity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.date">
+<tt class="descname">date</tt><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.load_average_15_min">
+<tt class="descname">load_average_15_min</tt><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.load_average_15_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.load_average_1_min">
+<tt class="descname">load_average_1_min</tt><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.load_average_1_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.load_average_5_min">
+<tt class="descname">load_average_5_min</tt><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.load_average_5_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.time_resolution">
+<tt class="descname">time_resolution</tt><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow.time_resolution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusSqlTable">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Monitoring.BatteryStatusDataBase.</tt><tt class="descname">BatteryStatusSqlTable</tt><big>(</big><em>database</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/BatteryStatusDataBase.html#BatteryStatusSqlTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusSqlTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../DataBase/SqlAlchemyBase.html#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable" title="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable"><tt class="xref py py-class docutils literal"><span class="pre">LaptopControlPanel.DataBase.SqlAlchemyBase.SqlTable</span></tt></a></p>
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusSqlTable.ROW_CLASS">
+<tt class="descname">ROW_CLASS</tt><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusSqlTable.ROW_CLASS" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow" title="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow"><tt class="xref py py-class docutils literal"><span class="pre">BatteryStatusRow</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusSqlTable.add_new_row">
+<tt class="descname">add_new_row</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/BatteryStatusDataBase.html#BatteryStatusSqlTable.add_new_row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusSqlTable.add_new_row" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusSqlTable.to_array">
+<tt class="descname">to_array</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/BatteryStatusDataBase.html#BatteryStatusSqlTable.to_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusSqlTable.to_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="BatteryMonitoring.html"
+                        title="previous chapter">2.7.1. <tt class="docutils literal"><span class="pre">BatteryMonitoring</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../System.html"
+                        title="next chapter">2.8. <tt class="docutils literal"><span class="pre">System</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/api/LaptopControlPanel/Monitoring/BatteryStatusDataBase.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../System.html" title="2.8. System"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="BatteryMonitoring.html" title="2.7.1. BatteryMonitoring"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Monitoring.html" >2.7. <tt class="docutils literal"><span class="pre">Monitoring</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

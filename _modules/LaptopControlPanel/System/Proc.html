@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LaptopControlPanel.System.Proc &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for LaptopControlPanel.System.Proc</h1><div class="highlight"><pre>
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
+<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c">####################################################################################################</span>
+
+<div class="viewcode-block" id="ProcFile"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/Proc.html#LaptopControlPanel.System.Proc.ProcFile">[docs]</a><span class="k">class</span> <span class="nc">ProcFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ProcFile.compile_format_list"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/Proc.html#LaptopControlPanel.System.Proc.ProcFile.compile_format_list">[docs]</a>    <span class="k">def</span> <span class="nf">compile_format_list</span><span class="p">(</span><span class="n">format_list</span><span class="p">):</span>
+
+        <span class="n">format_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">format_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">format_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">format_list</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">format_list</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">format_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">format_list</span> <span class="o">=</span> <span class="n">format_list</span> <span class="o">+</span> <span class="p">[</span><span class="s">&#39;&#39;</span><span class="p">]</span>
+            
+        <span class="n">separator</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">format_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">separator</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;A separator string is expected &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">field_name</span><span class="p">,</span> <span class="n">field_type</span> <span class="o">=</span> <span class="n">item</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;A string is expected &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field_type</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;A type is expected &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;A 2-tuple is expected &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+            <span class="n">separator</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">separator</span>
+
+        <span class="c"># check separator is not &#39;&#39;, field_name is uniq</span>
+
+        <span class="k">return</span> <span class="n">format_list</span>
+
+    <span class="c">##############################################</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ProcFile.join"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/Proc.html#LaptopControlPanel.System.Proc.ProcFile.join">[docs]</a>    <span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;/proc&#39;</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ProcFile.parse_line"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/Proc.html#LaptopControlPanel.System.Proc.ProcFile.parse_line">[docs]</a>    <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">compiled_format_list</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+
+        <span class="n">first_separator</span> <span class="o">=</span> <span class="n">compiled_format_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">first_separator</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">first_separator</span><span class="p">):]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+
+        <span class="n">number_of_fields</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compiled_format_list</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c"># +1 doesn&#39;t matter</span>
+
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">number_of_fields</span><span class="p">):</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span><span class="mi">1</span>
+            <span class="n">field_tuple</span><span class="p">,</span> <span class="n">separator</span> <span class="o">=</span> <span class="n">compiled_format_list</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">index</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">field_name</span><span class="p">,</span> <span class="n">field_type</span> <span class="o">=</span> <span class="n">field_tuple</span>
+            <span class="k">if</span> <span class="n">separator</span><span class="p">:</span>
+                <span class="n">separator_location</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">separator_location</span><span class="p">:</span> <span class="c"># must be &gt; 0</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">separator_location</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">field_text</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="n">separator_location</span><span class="p">]</span>
+            <span class="n">fields</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_type</span><span class="p">(</span><span class="n">field_text</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">separator_location</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">separator_location</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">separator</span><span class="p">):]</span>
+
+        <span class="k">return</span> <span class="n">fields</span>
+
+<span class="c">####################################################################################################</span>
+</div></div>
+<div class="viewcode-block" id="ProcOneLineFile"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/Proc.html#LaptopControlPanel.System.Proc.ProcOneLineFile">[docs]</a><span class="k">class</span> <span class="nc">ProcOneLineFile</span><span class="p">(</span><span class="n">ProcFile</span><span class="p">):</span>
+
+    <span class="n">__format_list__</span><span class="o">=</span> <span class="p">()</span>
+    <span class="n">__file_name__</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__file_name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_format_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compile_format_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__format_list__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="c">##############################################</span>
+
+<div class="viewcode-block" id="ProcOneLineFile.update"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/Proc.html#LaptopControlPanel.System.Proc.ProcOneLineFile.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_compiled_format_list</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
+<span class="c">####################################################################################################</span>
+</div></div>
+<div class="viewcode-block" id="LoadAverage"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/Proc.html#LaptopControlPanel.System.Proc.LoadAverage">[docs]</a><span class="k">class</span> <span class="nc">LoadAverage</span><span class="p">(</span><span class="n">ProcOneLineFile</span><span class="p">):</span>
+
+    <span class="n">__file_name__</span> <span class="o">=</span> <span class="s">&#39;loadavg&#39;</span>
+
+    <span class="n">__format_list__</span><span class="o">=</span> <span class="p">((</span><span class="s">&#39;number_of_job_1_min&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="s">&#39; &#39;</span><span class="p">,</span>
+                      <span class="p">(</span><span class="s">&#39;number_of_job_5_min&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="s">&#39; &#39;</span><span class="p">,</span>
+                      <span class="p">(</span><span class="s">&#39;number_of_job_15_min&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="s">&#39; &#39;</span><span class="p">,</span>
+                      <span class="p">(</span><span class="s">&#39;number_of_runnable_entities&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s">&#39;/&#39;</span><span class="p">,</span>
+                      <span class="p">(</span><span class="s">&#39;number_of_job_entities&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s">&#39; &#39;</span><span class="p">,</span>
+                      <span class="p">(</span><span class="s">&#39;last_pid&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span>
+                        
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># End</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

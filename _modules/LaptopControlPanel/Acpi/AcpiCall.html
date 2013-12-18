@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LaptopControlPanel.Acpi.AcpiCall &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for LaptopControlPanel.Acpi.AcpiCall</h1><div class="highlight"><pre>
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
+<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">LaptopControlPanel.Tools.DictTools</span> <span class="kn">import</span> <span class="n">DictInitialised</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="n">_module_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="c">####################################################################################################</span>
+
+<div class="viewcode-block" id="AcpiCallDevice"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice">[docs]</a><span class="k">class</span> <span class="nc">AcpiCallDevice</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">_logger</span> <span class="o">=</span> <span class="n">_module_logger</span><span class="o">.</span><span class="n">getChild</span><span class="p">(</span><span class="s">&#39;AcpiCallDevice&#39;</span><span class="p">)</span>
+
+    <span class="n">_acpi_call_device</span> <span class="o">=</span> <span class="s">&#39;/proc/acpi/call&#39;</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acpi_call_device_exists</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load_acpi_call_module</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acpi_call_device_exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s">&quot;Could not find </span><span class="si">%s</span><span class="s">. Is module acpi_call loaded?&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acpi_call_device</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+
+<div class="viewcode-block" id="AcpiCallDevice._acpi_call_device_exists"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._acpi_call_device_exists">[docs]</a>    <span class="k">def</span> <span class="nf">_acpi_call_device_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_acpi_call_device</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="AcpiCallDevice._load_acpi_call_module"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._load_acpi_call_module">[docs]</a>    <span class="k">def</span> <span class="nf">_load_acpi_call_module</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c"># kernel_version = subprocess.check_outpout([&#39;/bin/uname&#39;, &#39;-r&#39;])</span>
+        <span class="c"># module_path = os.path.join(&#39;lib&#39;, &#39;modules&#39;, kernel_version, &#39;extra&#39;, &#39;acpi_call.ko&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Load module acpi_call&quot;</span><span class="p">)</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">&#39;/sbin/modprobe&#39;</span><span class="p">,</span> <span class="s">&#39;acpi_call&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">rc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s">&quot;Cannot load module acpi_call&quot;</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="AcpiCallDevice.call"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice.call">[docs]</a>    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call_string</span><span class="p">):</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_acpi_call_device</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">device_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Call ACPI Function &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="n">call_string</span><span class="p">)</span>
+            <span class="n">device_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">call_string</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_acpi_call_device</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">device_file</span><span class="p">:</span>
+            <span class="n">return_value</span> <span class="o">=</span> <span class="n">device_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Call returned &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="n">return_value</span><span class="p">)</span>
+        <span class="c"># Fixme:</span>
+        <span class="n">return_value</span> <span class="o">=</span> <span class="n">return_value</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c"># &#39;\x00&#39;</span>
+
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">return_value</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="AcpiCallDevice.define_function"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice.define_function">[docs]</a>    <span class="k">def</span> <span class="nf">define_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">input_arguments</span><span class="p">,</span> <span class="n">output_arguments</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="n">AcpiCallFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">input_arguments</span><span class="p">,</span> <span class="n">output_arguments</span><span class="p">)</span>
+
+<span class="c">####################################################################################################</span>
+</div></div>
+<div class="viewcode-block" id="AcpiCallFunction"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallFunction">[docs]</a><span class="k">class</span> <span class="nc">AcpiCallFunction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">_logger</span> <span class="o">=</span> <span class="n">_module_logger</span><span class="o">.</span><span class="n">getChild</span><span class="p">(</span><span class="s">&#39;AcpiCallFunction&#39;</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acpi_call_device</span><span class="p">,</span> <span class="n">acpi_path</span><span class="p">,</span> <span class="n">input_arguments</span><span class="p">,</span> <span class="n">output_arguments</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_acpi_call_device</span> <span class="o">=</span> <span class="n">acpi_call_device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_acpi_path</span> <span class="o">=</span> <span class="n">acpi_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_arguments</span> <span class="o">=</span> <span class="n">input_arguments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_arguments</span> <span class="o">=</span> <span class="n">output_arguments</span>
+
+    <span class="c">##############################################</span>
+
+<div class="viewcode-block" id="AcpiCallFunction.call"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallFunction.call">[docs]</a>    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">double_word</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_arguments</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">call_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acpi_path</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">double_word</span><span class="p">)</span>
+        <span class="n">double_word</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acpi_call_device</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">call_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_arguments</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">double_word</span><span class="p">)</span>
+    
+<span class="c">####################################################################################################</span>
+</div></div>
+<div class="viewcode-block" id="AcpiCallArguments"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments">[docs]</a><span class="k">class</span> <span class="nc">AcpiCallArguments</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">_logger</span> <span class="o">=</span> <span class="n">_module_logger</span><span class="o">.</span><span class="n">getChild</span><span class="p">(</span><span class="s">&#39;AcpiCallArguments&#39;</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">items</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="nb">cmp</span><span class="o">=</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">cmp</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_arguments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">lower_bit</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">argument_name</span><span class="p">,</span> <span class="n">upper_bit</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_arguments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">AcpiCallArgument</span><span class="p">(</span><span class="n">argument_name</span><span class="p">,</span> <span class="n">upper_bit</span><span class="p">,</span> <span class="n">lower_bit</span><span class="p">))</span>
+            <span class="n">lower_bit</span> <span class="o">=</span> <span class="n">upper_bit</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_argument_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">argument</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_arguments</span><span class="p">]</span>
+
+    <span class="c">##############################################</span>
+
+<div class="viewcode-block" id="AcpiCallArguments.encode"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">given_argument</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">given_argument</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_argument_names</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Wrong argument </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">given_argument</span><span class="p">))</span>
+
+        <span class="n">double_word</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_arguments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">argument</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">argument</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">double_word</span> <span class="o">+=</span> <span class="n">argument</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">double_word</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="AcpiCallArguments.decode"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArguments.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">double_word</span><span class="p">):</span>
+
+        <span class="n">values</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_arguments</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">argument</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">double_word</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">argument</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;reserved&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Reserved </span><span class="si">%s</span><span class="s"> bits are non-zero </span><span class="si">%u</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">argument</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="n">argument</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">DictInitialised</span><span class="p">(</span><span class="o">**</span><span class="n">values</span><span class="p">)</span>
+
+<span class="c">####################################################################################################</span>
+</div></div>
+<div class="viewcode-block" id="AcpiCallArgument"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument">[docs]</a><span class="k">class</span> <span class="nc">AcpiCallArgument</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">upper_bit</span><span class="p">,</span> <span class="n">lower_bit</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upper_bit</span> <span class="o">=</span> <span class="n">upper_bit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lower_bit</span> <span class="o">=</span> <span class="n">lower_bit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_bits</span> <span class="o">=</span> <span class="n">upper_bit</span> <span class="o">-</span> <span class="n">lower_bit</span> <span class="o">+</span><span class="mi">1</span>
+
+    <span class="c">##############################################</span>
+
+<div class="viewcode-block" id="AcpiCallArgument._check_value"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument._check_value">[docs]</a>    <span class="k">def</span> <span class="nf">_check_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_bits</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">value</span><span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_bits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Out of range&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="AcpiCallArgument.encode"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_bit</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="AcpiCallArgument.decode"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallArgument.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">double_word</span><span class="p">):</span>
+
+        <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">double_word</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_bit</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_bits</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_bits</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+
+<span class="c">####################################################################################################</span>
+<span class="c"># </span>
+<span class="c"># End</span>
+<span class="c"># </span>
+<span class="c">####################################################################################################</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
