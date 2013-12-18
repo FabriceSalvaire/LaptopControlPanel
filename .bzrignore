@@ -4,3 +4,4 @@ build
 not-yet-included
 .git
 .gitignore
+doc/sphinx/old-api

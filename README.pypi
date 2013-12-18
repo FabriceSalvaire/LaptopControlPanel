@@ -1,9 +1,22 @@
-LaptopControlPanel is a Python module that provides a Graphical
-Control Panel for a Lenovo Thinkpad Laptop and a tool to monitor and
-manage the battery.
+LaptopControlPanel is a Python module that provides a Graphical Control Panel
+for Lenovo Thinkpad Laptop and a console tool to monitor and manage the
+battery. Such functions are not provided by standard control panels like those
+of the KDE desktop.
 
 The control panel features:
-* switch on/off network interfaces
-* battery control
-* fan control
-* switch on/off Nvidia GPU
+
+ * switch on/off network interfaces (wifi and bluetooth)
+ * switch on/off Nvidia GPU using /proc/acpi/bbswitch
+ * fan control using thinkpad-acpi module and /proc/acpi/ibm/fan
+ * battery control through ACPI calls
+
+The battery management tool permits:
+
+ * to set the start and stop capacity threshold to charge the battery,
+ * to switch on battery when AC power is plugged,
+ * to setup a "peak shift" procedure.
+
+Some usages of these functions are:
+
+ * to switch off the Nvidia GPU to save battery
+ * to speed-up the fan to cool the hard drive located under the left hand

@@ -1,0 +1,6 @@
+#! /bin/bash
+
+source /srv/scratch/python-virtual-env/sphinx/bin/activate
+make -f Makefile.sphinx html
+
+# End

@@ -1,0 +1,15 @@
+.. -*- Mode: rst -*-
+
+.. Global Definitions
+
+.. |github| image:: /images/GitHub_Logo.png
+   :alt: GitHub logo
+   :height: 20
+
+.. |ohloh| image:: https://www.ohloh.net/accounts/230426/widgets/account_tiny.gif
+   :target: https://www.ohloh.net/accounts/fabricesalvaire
+   :alt: Fabrice Salvaire's Ohloh profile
+   :height: 15px
+   :width:  80px
+
+.. End

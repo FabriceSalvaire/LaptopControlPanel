@@ -1,0 +1,19 @@
+.. -*- Mode: rst -*-
+
+.. Already defined
+..   :http-equiv=Content-Type: text/html; charset=utf-8
+
+.. meta::
+    :content-language: en
+    :language: en
+    :content-type: utf-8
+    :charset: utf-8
+    
+    :author: Fabrice Salvaire
+    :copyright: Fabrice Salvaire
+    
+    :robots: all, index, follow, archive
+    
+    :generator: sphinx
+
+.. End

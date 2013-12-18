@@ -7,15 +7,20 @@ LaptopControlPanel V0.1.0
 About
 -----
 
-LaptopControlPanel is a Python module that provides a Graphical Control Panel for a Lenovo Thinkpad
-Laptop and a tool to monitor and manage the battery.
+LaptopControlPanel is a Python module that provides a Graphical Control Panel for Lenovo Thinkpad
+Laptop and a console tool to monitor and manage the battery. Such functions are not provided by
+standard control panels like those of the KDE desktop.
+
+.. warning::
+  This Python module uses ACPI calls and low level hardware functions. A miss use of these tools can
+  crash the computer.
 
 The control panel features:
 
 * switch on/off network interfaces (wifi and bluetooth)
-* battery control
-* fan control
-* switch on/off Nvidia GPU
+* switch on/off Nvidia GPU using ``/proc/acpi/bbswitch``
+* fan control using **thinkpad-acpi** module and ``/proc/acpi/ibm/fan``
+* battery control through ACPI calls
 
 The battery management tool permits:
 
@@ -23,13 +28,21 @@ The battery management tool permits:
 * to switch on battery when AC power is plugged,
 * to setup a "peak shift" procedure.
 
-The source of the ACPI calls for the battery management is unknown and comes from the repository
-`tpacpi-bat https://github.com/teleshoes/tpacpi-bat`_. The battery is managed by ACPI calls through
-the Low Pin Count bus and the Embedded Controler (ASL base ```\_SB.PCI0.LPC.EC.HKEY```).
+Some usages of these functions are:
 
-For reference, this discussion `Laptop shock detection and harddisk protection
-http://lkml.indiana.edu/hypermail/linux/kernel/0810.0/2603.html`_ on LKML illustrates the legal
+* to switch off the Nvidia GPU to save battery
+* to speed-up the fan to cool the hard drive located under the left hand
+
+The source of the ACPI calls for the battery management is unknown and comes from the repository
+`tpacpi-bat <https://github.com/teleshoes/tpacpi-bat>`_. For reference, this discussion `Laptop
+shock detection and harddisk protection
+<http://lkml.indiana.edu/hypermail/linux/kernel/0810.0/2603.html>`_ on LKML illustrates the legal
 concern for such information.
+
+The battery is managed by ACPI calls through the Low Pin Count bus and the Embedded Controller (ASL
+base is ``\_SB.PCI0.LPC.EC.HKEY``). ACPI is an abstraction layer to set and get registers on the
+computer busses. The (`acpi_call <https://github.com/mkottman/acpi_call>`_) module, which is not
+included in the kernel, is required to perform these calls. This module must be used carefully.
 
 Source Repository
 -----------------
@@ -43,7 +56,7 @@ Requirements
 
 * Python 2.7
 * PyQt 4.9
-* `acpi_call https://github.com/mkottman/acpi_call`_
+* `acpi_call <https://github.com/mkottman/acpi_call>`_
 
 Building
 --------
@@ -56,9 +69,9 @@ Running
 -------
 
 .. important::
-  Actually LaptopControlPanel needs root privileges to manage the hardware.
+  Actually LaptopControlPanel needs root privileges so as to read and write **/proc** entries.
 
-Load the *acpi_call* module.
+The *acpi_call* module must be loaded in order to manage the battery.
 
 Set the terminal environment using::
 
