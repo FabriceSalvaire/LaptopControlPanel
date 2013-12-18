@@ -2,7 +2,7 @@
 
 ####################################################################################################
 # 
-# LaptopControlPanel - @ProjectDescription@..
+# LaptopControlPanel - A Laptop Control Panel
 # Copyright (C) 2013 Fabrice Salvaire
 #
 # This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@
 
 ####################################################################################################
 
-import os
 from distutils.core import setup
 # from setuptools import setup
 

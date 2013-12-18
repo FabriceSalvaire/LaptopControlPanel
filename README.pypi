@@ -1,0 +1,9 @@
+LaptopControlPanel is a Python module that provides a Graphical
+Control Panel for a Lenovo Thinkpad Laptop and a tool to monitor and
+manage the battery.
+
+The control panel features:
+* switch on/off network interfaces
+* battery control
+* fan control
+* switch on/off Nvidia GPU

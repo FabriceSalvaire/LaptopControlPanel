@@ -1,6 +1,6 @@
 ####################################################################################################
 # 
-# LaptopControlPanel - @ProjectDescription@..
+# LaptopControlPanel - A Laptop Control Panel
 # Copyright (C) 2013 Fabrice Salvaire
 #
 # This program is free software: you can redistribute it and/or modify
@@ -29,9 +29,11 @@ import os
 # Used for the long_description.
 def read(file_name):
 
-    path = os.path.dirname(__file__)
+    path = os.path.dirname(os.path.realpath(__file__))
     if os.path.basename(path) == 'tools':
         path = os.path.dirname(path)
+    elif 'build/bdist' in path:
+        path = path[:path.find('build/bdist')]
     absolut_file_name = os.path.join(path, file_name)
 
     return open(absolut_file_name).read()
@@ -43,14 +45,17 @@ setup_dict = dict(
     version='0.1.0',
     author='Fabrice Salvaire',
     author_email='fabrice.salvaire@orange.fr',
-    description='...',
+    description='A Control Panel for Lenovo Thinkpad Laptop',
     license = "GPLv3",
-    keywords = "...",
-    url='http://fabrice-salvaire.pagesperso-orange.fr/software/index.html',
-    scripts=['bin/laptop-control-panel'],
+    keywords = "laptop control panel",
+    url='https://github.com/FabriceSalvaire/LaptopControlPanel',
+    scripts=[
+        'bin/battery-control',
+        'bin/battery-monitoring',
+        'bin/laptop-control-panel',
+        ],
     packages=['LaptopControlPanel'],
-    data_files = [('share/LaptopControlPanel/icons',['share/icons/LaptopControlPanel.svg']),
-                  ('share/applications', ['spec/LaptopControlPanel.desktop']),
+    data_files = [('share/LaptopControlPanel/icons',['share/icons']),
                   ],
     long_description=read('README.pypi'),
     # cf. http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -63,7 +68,8 @@ setup_dict = dict(
         "Programming Language :: Python :: 2.7",
         ],
     install_requires=[
-        'pyqt>=4.9',
+        # pip install => Could not find any downloads that satisfy the requirement PyQt4>=4.9
+        # 'PyQt4>=4.9', 
         ],
     )
 
