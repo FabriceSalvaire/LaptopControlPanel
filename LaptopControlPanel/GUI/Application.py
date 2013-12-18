@@ -8,6 +8,7 @@
 ####################################################################################################
 
 import logging
+import os
 
 from PyQt4 import QtCore, QtGui
 
@@ -31,6 +32,10 @@ class Application(GuiApplicationBase, ApplicationBase):
         super(Application, self).__init__(args=args)
         self._logger.debug(str(args))
 
+        root_uid = 0
+        if os.getuid() == root_uid:
+            self.setStyle('plastique')
+
         self.timer = QtCore.QTimer()
         self.timer.start(minute(1))
         self.timer.timeout.connect(self._refresh)
@@ -39,7 +44,7 @@ class Application(GuiApplicationBase, ApplicationBase):
         
         from .MainWindow import MainWindow
         self._main_window = MainWindow()
-        self._main_window.showMaximized()
+        self._main_window.show() # Maximized
 
         self._post_init_actions()
         self._init_tray_icon()

@@ -17,9 +17,13 @@ from LaptopControlPanel.Tools.DictTools import DictInitialised
 
 ####################################################################################################
 
+_module_logger = logging.getLogger(__name__)
+
+####################################################################################################
+
 class AcpiCallDevice(object):
 
-    _logger = logging.getLogger(__name__ + '.AcpiCallDevice')
+    _logger = _module_logger.getChild('AcpiCallDevice')
 
     _acpi_call_device = '/proc/acpi/call'
 
@@ -74,7 +78,7 @@ class AcpiCallDevice(object):
 
 class AcpiCallFunction(object):
 
-    _logger = logging.getLogger(__name__ + '.AcpiCallFunction')
+    _logger = _module_logger.getChild('AcpiCallFunction')
 
     ##############################################
 
@@ -98,7 +102,7 @@ class AcpiCallFunction(object):
 
 class AcpiCallArguments(object):
 
-    _logger = logging.getLogger(__name__ + '.AcpiCallArguments')
+    _logger = _module_logger.getChild('AcpiCallArguments')
 
     ##############################################
 

@@ -53,9 +53,13 @@ class MainWindow(MainWindowBase):
 
         from .Pages.NetworkDevicePage import NetworkDevicePage
         from .Pages.PowerSourcePage import PowerSourcePage
+        from .Pages.FanPage import FanPage
+        from .Pages.GpuPage import GpuPage
         # for page_class in PageMetaClass.pages.itervalues():
         for page_class in (NetworkDevicePage,
                            PowerSourcePage,
+                           FanPage,
+                           GpuPage,
                            ):
             item = QtGui.QListWidgetItem(page_class.__page_title__)
             self._list_widget.addItem(item)

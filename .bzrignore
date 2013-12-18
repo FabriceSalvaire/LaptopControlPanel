@@ -2,3 +2,5 @@
 LaptopControlPanel/Version.py
 build
 not-yet-included
+.git
+.gitignore

@@ -9,9 +9,6 @@
 
 import subprocess
 import re
-import sys
-
-from PyQt4 import QtGui
 
 ####################################################################################################
 
@@ -92,7 +89,7 @@ class PowerSourcePage(PageBase):
             form.start_threshold_spin_box.setValue(start_threshold)
             form.stop_threshold_spin_box.setValue(stop_threshold)
             form.error_message_label.hide()
-        except:
+        except Exception:
             form.battery_charge_settings_group_box.setEnabled(False)
 
     ##############################################
