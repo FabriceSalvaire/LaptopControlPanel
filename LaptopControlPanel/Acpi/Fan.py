@@ -8,7 +8,12 @@
 ####################################################################################################
 
 import logging
-import subprocess
+import threading
+import time
+
+####################################################################################################
+
+from LaptopControlPanel.Kernel.Module import is_module_loaded, unload_module, load_module
 
 ####################################################################################################
 
@@ -52,13 +57,11 @@ class FanManager(object):
 
         # /!\ This code has side-effect on keyboard (AltGr)
 
-        self._logger.debug("Load module thinkpad-acpi")
-        rc = subprocess.check_call(['/sbin/rmmod', 'thinkpad-acpi'])
-        # if rc:
-        #     raise NameError("Cannot unload thinkpad-acpi")
-        rc = subprocess.check_call(['/sbin/modprobe', 'thinkpad-acpi', 'fan_control=1'])
-        if rc:
-            raise NameError("Cannot load module thinkpad-acpi")
+        module = 'thinkpad-acpi'
+        if is_module_loaded(module):
+            unload_module(module)
+        if not is_module_loaded(module):
+            load_module(module, options=['fan_control=1'])
 
     ##############################################
 
@@ -93,6 +96,55 @@ class FanManager(object):
         with open(self.__fan_file__, 'w') as f:
             f.write('level ' + level)
         self._get_state()
+
+    ##############################################
+
+    def calibrate(self):
+
+        calibrate_thread = CalibrateThread(self)
+        speeds = calibrate_thread.run()
+
+        return speeds
+
+####################################################################################################
+
+class CalibrateThread(threading.Thread):
+
+    _logger = _module_logger.getChild('CalibrateThread')
+
+    ##############################################
+
+    def __init__(self, fan_manager):
+
+        super(CalibrateThread, self).__init__()
+        self.daemon = True
+
+        self._fan_manager = fan_manager
+
+    ###############################################
+
+    def run(self):
+
+        sleep_time = 10 # s
+
+        current_level = self._fan_manager.level
+        speeds = []
+        for level in list(range(8)) + ['full-speed']:
+            self._fan_manager.level = level
+            speed_t0 = self._fan_manager.speed
+            while True:
+                time.sleep(sleep_time)
+                speed = self._fan_manager.speed
+                self._logger.debug("Speed %u rpm" % (speed))
+                if abs(speed_t0 - speed) < 1:
+                    break
+                else:
+                    speed_t0 = speed
+            self._logger.info("Level %s: %u rpm" % (str(level), speed))
+            speeds.append(speed)
+        self._fan_manager.level = current_level
+
+        return speeds
 
 ####################################################################################################
 # 

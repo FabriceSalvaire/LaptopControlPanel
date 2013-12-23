@@ -43,9 +43,9 @@ class NetworkDevice(SysDevice):
 
         super(NetworkDevice, self).__init__(path)
 
-        self._index = self._read_int('index')
-        self._name = self._read('name')
-        self._type = self._read('type')
+        self._index = self.read_int('index')
+        self._name = self.read('name')
+        self._type = self.read('type')
 
     ##############################################
 
@@ -57,13 +57,13 @@ class NetworkDevice(SysDevice):
 
     @property
     def hard(self):
-        return self._read_bool('hard')
+        return self.read_bool('hard')
 
     ##############################################
 
     @property
     def soft(self):
-        return self._read_bool('soft')
+        return self.read_bool('soft')
 
     ##############################################
 

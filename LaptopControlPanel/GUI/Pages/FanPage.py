@@ -24,6 +24,7 @@ import numpy as np
 from .Page import PageBase
 from LaptopControlPanel.Acpi.Fan import FanManager
 from LaptopControlPanel.Monitoring.RoundRobinMonitoring import RoundRobinMonitoring, DataProvider
+from LaptopControlPanel.System.CoreTemperature import CoreTemperature
 from LaptopControlPanel.System.Hdd import HddManager
 
 ####################################################################################################
@@ -33,6 +34,23 @@ from .ui.FanPage_ui import Ui_form
 ####################################################################################################
 
 _module_logger = logging.getLogger(__name__)
+
+####################################################################################################
+
+class CpuTemperatureDataProvider(DataProvider):
+
+    __name__ = 'CPU Temperature'
+    __dtype__ = np.uint
+
+    ##############################################
+
+    def __init__(self):
+        self._core_temperature = CoreTemperature()
+
+    ##############################################
+
+    def __call__(self):
+        return self._core_temperature.temperature
 
 ####################################################################################################
 
@@ -86,6 +104,7 @@ class FanPage(PageBase):
         self._form = Ui_form()
         self._form.setupUi(self)
 
+        self._core_temperature = CoreTemperature()
         self._hdd_manager = HddManager()
         self._fan_manager = FanManager()
 
@@ -137,11 +156,18 @@ class FanPage(PageBase):
 
     ##############################################
 
+    @staticmethod
+    def _format_degree(value):
+        return str(value) + u' °C'
+
+    ##############################################
+
     def refresh(self, refresh_level=True):
 
         form = self._form
 
-        form.hdd_temperature_label.setText(str(self._hdd_manager.temperature()) + u' °C')
+        form.cpu_temperature_label.setText(self._format_degree(int(self._core_temperature.temperature)))
+        form.hdd_temperature_label.setText(self._format_degree(self._hdd_manager.temperature()))
         form.fan_speed_label.setText(str(self._fan_manager.speed) + ' rpm')
       
         if refresh_level:
@@ -176,11 +202,18 @@ class FanPage(PageBase):
             axes.set_ylim(0, 6000)
             # self._figure.add_axes(self._monitoring._data_frame.plot()) # segfault
 
-            data_provider_name = 'HDD Temperature'
+            data_provider_name = 'CPU Temperature'
             axes = self._axes_right
             axes.clear()        
             axes.set_ylabel(data_provider_name)
-            axes.set_ylim(0, 60)
+            axes.set_ylim(0, 100)
+            axes.plot(times, self._monitoring.data_frame[data_provider_name][:time_slot], 'blue')
+
+            data_provider_name = 'HDD Temperature'
+            # axes = self._axes_right
+            # axes.clear()        
+            # axes.set_ylabel(data_provider_name)
+            # axes.set_ylim(0, 60)
             axes.plot(times, self._monitoring.data_frame[data_provider_name][:time_slot], 'red')
 
             self._canvas.draw()
@@ -209,7 +242,10 @@ class FanPage(PageBase):
     def _on_monitor_state_changed(self, state):
 
         if state:
-            data_providers = (HddTemperatureDataProvider, FanSpeedDataProvider)
+            data_providers = (CpuTemperatureDataProvider,
+                              HddTemperatureDataProvider,
+                              FanSpeedDataProvider,
+                              )
             self._monitoring = RoundRobinMonitoring(time_resolution=20, #s
                                                     time_period=500,
                                                     data_providers=data_providers)

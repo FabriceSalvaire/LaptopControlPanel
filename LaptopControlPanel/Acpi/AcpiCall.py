@@ -9,11 +9,11 @@
 
 import logging
 import os
-import subprocess
 
 ####################################################################################################
 
 from LaptopControlPanel.Tools.DictTools import DictInitialised
+from LaptopControlPanel.Kernel.Module import is_module_loaded, load_module
 
 ####################################################################################################
 
@@ -46,12 +46,9 @@ class AcpiCallDevice(object):
 
     def _load_acpi_call_module(self):
 
-        # kernel_version = subprocess.check_outpout(['/bin/uname', '-r'])
-        # module_path = os.path.join('lib', 'modules', kernel_version, 'extra', 'acpi_call.ko')
-        self._logger.debug("Load module acpi_call")
-        rc = subprocess.check_call(['/sbin/modprobe', 'acpi_call'])
-        if rc:
-            raise NameError("Cannot load module acpi_call")
+        module = 'acpi_call'
+        if not is_module_loaded(module):
+            load_module(module)
 
     ##############################################
 

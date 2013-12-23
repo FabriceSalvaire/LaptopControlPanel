@@ -66,6 +66,12 @@ loggers:
     handlers: [console]
     propagate: no
 
+  fan-calibration:
+    level: DEBUG
+    #level: INFO
+    handlers: [console]
+    propagate: no
+
 ##################################################
 #
 # Modules
