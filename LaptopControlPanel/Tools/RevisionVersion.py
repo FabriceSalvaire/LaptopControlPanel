@@ -42,11 +42,8 @@ class RevisionVersion(object):
 
         elif isinstance(version, dict):
             self.major, self.minor, self.revision = [version[key] for key in 'major', 'minor', 'revision']
-            if 'suffix' in version:
-                self.suffix = version['suffix']
-            else:
-                self.suffix = None
-
+            self.suffix = version.get('suffix', None)
+ 
         else:
             raise NameError('parameter must be a string or a tuple')
         
