@@ -184,20 +184,17 @@ class FanPage(PageBase):
                 elif level == 'full-speed':
                     form.full_speed_radio_button.setChecked(True)
 
-        if self._monitoring is not None and self._monitoring.data_frame:
+        if self._monitoring is not None:
             self._logger.info("Refresh plot")
-
-            time_slot = self._monitoring.time_slot
 
             axes = self._axes_left
             axes.clear()        
             axes.grid(True)
-            # times = np.arange(self._monitoring.period)
-            times = np.arange(time_slot)
+            times = self._monitoring.times
             axes.set_xlabel('Times')
 
             data_provider_name = 'Fan Speed'
-            axes.plot(times, self._monitoring.data_frame[data_provider_name][:time_slot], 'green')
+            axes.plot(times, self._monitoring.field(data_provider_name), 'green')
             axes.set_ylabel(data_provider_name)
             axes.set_ylim(0, 6000)
             # self._figure.add_axes(self._monitoring._data_frame.plot()) # segfault
@@ -207,14 +204,14 @@ class FanPage(PageBase):
             axes.clear()        
             axes.set_ylabel(data_provider_name)
             axes.set_ylim(0, 100)
-            axes.plot(times, self._monitoring.data_frame[data_provider_name][:time_slot], 'blue')
+            axes.plot(times, self._monitoring.field(data_provider_name), 'blue')
 
             data_provider_name = 'HDD Temperature'
             # axes = self._axes_right
             # axes.clear()        
             # axes.set_ylabel(data_provider_name)
             # axes.set_ylim(0, 60)
-            axes.plot(times, self._monitoring.data_frame[data_provider_name][:time_slot], 'red')
+            axes.plot(times, self._monitoring.field(data_provider_name), 'red')
 
             self._canvas.draw()
 
@@ -246,11 +243,11 @@ class FanPage(PageBase):
                               HddTemperatureDataProvider,
                               FanSpeedDataProvider,
                               )
-            self._monitoring = RoundRobinMonitoring(time_resolution=20, #s
-                                                    time_period=500,
-                                                    data_providers=data_providers)
+            time_resolution = 20 # s
+            time_period = 2 * 60 * 60 / time_resolution
+            self._monitoring = RoundRobinMonitoring(time_resolution, time_period, data_providers)
             self._monitoring.start()
-            # self.refresh()
+            self.refresh()
         else:
             if self._monitoring:
                 self._monitoring.stop()

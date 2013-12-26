@@ -38,8 +38,8 @@ class SleepThread(threading.Thread):
     def run(self):
 
         while not self._stop.is_set():
-            time.sleep(self.sleep_time)
             self.work()
+            time.sleep(self.sleep_time)
 
     ###############################################
 

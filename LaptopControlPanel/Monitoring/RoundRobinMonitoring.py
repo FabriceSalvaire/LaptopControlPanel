@@ -8,10 +8,8 @@
 ####################################################################################################
 
 import logging
-import time
 
 import numpy as np
-import pandas as pd
 
 ####################################################################################################
 
@@ -61,9 +59,16 @@ class RoundRobinMonitoring(SleepThread):
         self._time_period = time_period
         self._data_providers = [data_provider() for data_provider in data_providers]
 
-        self._data_frame = None
-        self._start_time = None
+        self._init_date_frame()
+        self._previous_frame = False
         self._time_slot = 0
+
+    ##############################################
+
+    def _init_date_frame(self):
+
+        dtype = [(str(data_provider), data_provider.dtype) for data_provider in self._data_providers]
+        self._data_frame = np.zeros(self._time_period, dtype=dtype)
 
     ##############################################
 
@@ -80,43 +85,63 @@ class RoundRobinMonitoring(SleepThread):
     ##############################################
 
     @property
-    def data_frame(self):
-        return self._data_frame
-
-    ##############################################
-
-    @property
     def time_slot(self):
         return self._time_slot
 
     ##############################################
 
-    def _init_date_frame(self):
+    @property
+    def last_time(self):
 
-        self._start_time = time.time()
-        # current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        # index = pd.date_range(current_time, periods=self._time_period, freq='%us' % self.time_resolution)
-        self._data_frame = pd.DataFrame({str(data_provider): np.zeros(self._time_period, dtype=data_provider.dtype)
-                                         for data_provider in self._data_providers},
-                                        # index=index, # then indexing must be timestamp
-                                        )
+        if self._previous_frame:
+            return self._time_period
+        else:
+            return self._time_slot
+
+    ##############################################
+
+    @property
+    def times(self):
+
+        return np.arange(self.last_time)
+
+    ##############################################
+
+    def field(self, name):
+
+        time_slot = self._time_slot
+        circular_buffer = self._data_frame[name]
+        if self._previous_frame:
+            time_slot_reciproqual = self._time_period - time_slot
+            data = circular_buffer.copy()
+            data[time_slot_reciproqual:] = circular_buffer[:time_slot]
+            data[:time_slot_reciproqual] = circular_buffer[time_slot:]
+            return data
+        else:
+            return circular_buffer[:time_slot]
 
     ##############################################
 
     def work(self):
 
-        if self._start_time is None:
-            self._init_date_frame()
-        # current_time = time.time()
-        # time_slot = int((current_time - self._start_time) / self.time_resolution) % self._time_period
         time_slot = self._time_slot
-
         self._logger.info("Time slot %u" % (time_slot))
 
         for data_provider in self._data_providers:
             self._data_frame[str(data_provider)][time_slot] = data_provider()
 
-        self._time_slot = (self._time_slot +1) % self._time_period
+        # Circular buffer:
+        # |0           -> | ts             | time period
+        # | current frame | previous frame |
+
+        # self._time_slot = (self._time_slot +1) % self._time_period
+        time_slot += 1
+        if time_slot == self._time_period:
+            # start a new frame
+            self._previous_frame = True
+            self._time_slot = 0
+        else:
+            self._time_slot = time_slot
 
 ####################################################################################################
 # 
