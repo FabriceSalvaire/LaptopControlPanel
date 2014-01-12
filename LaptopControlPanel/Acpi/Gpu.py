@@ -8,7 +8,7 @@
 ####################################################################################################
 
 import logging
-import subprocess
+import os
 
 ####################################################################################################
 
@@ -21,6 +21,12 @@ class GpuManager(object):
     _logger = _module_logger.getChild('GpuManager')
 
     __bbswitch_file__ = '/proc/acpi/bbswitch'
+
+    ##############################################
+
+    @staticmethod
+    def has_bbswitch():
+        return os.path.exists(GpuManager.__bbswitch_file__)
 
     ##############################################
 

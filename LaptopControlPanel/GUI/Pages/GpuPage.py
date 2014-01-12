@@ -38,7 +38,8 @@ class GpuPage(PageBase):
 
     def _init_connection(self):
 
-        self._form.on_off_button.clicked.connect(self._change_gpu_state)
+        if GpuManager.has_bbswitch():
+            self._form.on_off_button.clicked.connect(self._change_gpu_state)
 
     ##############################################
 
@@ -63,7 +64,10 @@ class GpuPage(PageBase):
 
     def refresh(self):
 
-        self._gpu_state = GpuManager.state()
+        if GpuManager.has_bbswitch():
+            self._gpu_state = GpuManager.state()
+        else:
+            self._gpu_state = False
         self._set_on_off_label()
 
 ####################################################################################################
