@@ -16,7 +16,7 @@ from LaptopControlPanel.Kernel.Module import is_module_loaded, load_module
 
 class CoreTemperature(SysDevice):
 
-    __path__ = '/sys/devices/platform/coretemp.0'
+    __path__ = '/sys/devices/platform/coretemp.0/hwmon/hwmon2'
 
     ##############################################
 
