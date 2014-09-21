@@ -60,7 +60,10 @@ class MainWindow(MainWindowBase):
         horizontal_Layout = QtGui.QHBoxLayout(central_widget)
 
         self._list_widget = QtGui.QListWidget(central_widget)
-        self._list_widget.setMaximumSize(QtCore.QSize(200, 16777215))
+        size_policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self._list_widget.setSizePolicy(size_policy)
+        self._list_widget.setMinimumSize(QtCore.QSize(200, 0))
+        self._list_widget.setTextElideMode(QtCore.Qt.ElideNone)
 
         self._stacked_widget = QtGui.QStackedWidget(central_widget)
 
