@@ -8,6 +8,7 @@
   LaptopControlPanel/Config
   LaptopControlPanel/DataBase
   LaptopControlPanel/GUI
+  LaptopControlPanel/Kernel
   LaptopControlPanel/Logging
   LaptopControlPanel/Monitoring
   LaptopControlPanel/System
