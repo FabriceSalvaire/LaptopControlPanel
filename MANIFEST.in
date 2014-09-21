@@ -5,15 +5,22 @@ include CHANGES.txt
 include GPL-V3.0.txt
 include LICENSE.txt
 include MANIFEST.in
-include TODO.rst
+include README.html
+include README.rst
+include README.txt
+include make-gui
 include make-release.sh
 include pylintrc.ini
 include setenv.sh start.sh
 include setup_data.py
+recursive-include LaptopControlPanel *.py *.yml *.ui Makefile.pyqt Version.py.in
 recursive-include doc *
+recursive-include doc/sphinx/source/_static *
+recursive-include gh-pages *
 recursive-include share *
 recursive-include spec *.spec *.desktop
 recursive-include tools *
-recursive-include unit-test *.py
+recursive-include unit_test *.py
 prune build
 prune doc/sphinx/build
+prune *~ *.pyc
