@@ -52,7 +52,20 @@
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>
 <span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
-<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># Copyright (C) 2014 Fabrice Salvaire</span>
+<span class="c">#</span>
+<span class="c"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU General Public License as published by</span>
+<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c"># (at your option) any later version.</span>
+<span class="c"># </span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c"># </span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c"># </span>
 <span class="c">####################################################################################################</span>
 
@@ -94,7 +107,7 @@
 
         <span class="nb">super</span><span class="p">(</span><span class="n">PowerSource</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 
@@ -110,7 +123,7 @@
 
     <span class="nd">@property</span>
 <div class="viewcode-block" id="AcPower.online"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.AcPower.online">[docs]</a>    <span class="k">def</span> <span class="nf">online</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_bool</span><span class="p">(</span><span class="s">&#39;online&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_bool</span><span class="p">(</span><span class="s">&#39;online&#39;</span><span class="p">)</span>
 
 <span class="c">####################################################################################################</span>
 </div></div>
@@ -120,85 +133,85 @@
 
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.status"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.present"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.present">[docs]</a>    <span class="k">def</span> <span class="nf">present</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_bool</span><span class="p">(</span><span class="s">&#39;present&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_bool</span><span class="p">(</span><span class="s">&#39;present&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.technology"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.technology">[docs]</a>    <span class="k">def</span> <span class="nf">technology</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="s">&#39;technology&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;technology&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.cycle_count"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.cycle_count">[docs]</a>    <span class="k">def</span> <span class="nf">cycle_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="s">&#39;cycle_count&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="s">&#39;cycle_count&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.voltage_min_design"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.voltage_min_design">[docs]</a>    <span class="k">def</span> <span class="nf">voltage_min_design</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="s">&#39;voltage_min_design&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="s">&#39;voltage_min_design&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.voltage_now"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.voltage_now">[docs]</a>    <span class="k">def</span> <span class="nf">voltage_now</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="s">&#39;voltage_now&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="s">&#39;voltage_now&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.power_now"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.power_now">[docs]</a>    <span class="k">def</span> <span class="nf">power_now</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="s">&#39;power_now&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="s">&#39;power_now&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.energy_full_design"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.energy_full_design">[docs]</a>    <span class="k">def</span> <span class="nf">energy_full_design</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="s">&#39;energy_full_design&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="s">&#39;energy_full_design&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.energy_full"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.energy_full">[docs]</a>    <span class="k">def</span> <span class="nf">energy_full</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="s">&#39;energy_full&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="s">&#39;energy_full&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.energy_now"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.energy_now">[docs]</a>    <span class="k">def</span> <span class="nf">energy_now</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="s">&#39;energy_now&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="s">&#39;energy_now&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.capacity"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.capacity">[docs]</a>    <span class="k">def</span> <span class="nf">capacity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="s">&#39;capacity&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="s">&#39;capacity&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.model_name"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.model_name">[docs]</a>    <span class="k">def</span> <span class="nf">model_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="s">&#39;model_name&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;model_name&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.manufacturer"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.manufacturer">[docs]</a>    <span class="k">def</span> <span class="nf">manufacturer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="s">&#39;manufacturer&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;manufacturer&#39;</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Battery.serial_number"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/PowerSource.html#LaptopControlPanel.System.PowerSource.Battery.serial_number">[docs]</a>    <span class="k">def</span> <span class="nf">serial_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="s">&#39;serial_number&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;serial_number&#39;</span><span class="p">)</span>
 
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>

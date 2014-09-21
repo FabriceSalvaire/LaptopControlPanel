@@ -52,14 +52,32 @@
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>
 <span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
-<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># Copyright (C) 2014 Fabrice Salvaire</span>
+<span class="c">#</span>
+<span class="c"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU General Public License as published by</span>
+<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c"># (at your option) any later version.</span>
+<span class="c"># </span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c"># </span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c"># </span>
 <span class="c">####################################################################################################</span>
 
 <span class="c">####################################################################################################</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c">####################################################################################################</span>
+
+<span class="kn">from</span> <span class="nn">LaptopControlPanel.Kernel.Module</span> <span class="kn">import</span> <span class="n">is_module_loaded</span><span class="p">,</span> <span class="n">unload_module</span><span class="p">,</span> <span class="n">load_module</span>
 
 <span class="c">####################################################################################################</span>
 
@@ -77,7 +95,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_load_thinkpad_acpi_module</span><span class="p">()</span>
+        <span class="c">#!# self._load_thinkpad_acpi_module()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">()</span>
 
     <span class="c">##############################################</span>
@@ -101,13 +119,13 @@
 </div>
 <div class="viewcode-block" id="FanManager._load_thinkpad_acpi_module"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/Fan.html#LaptopControlPanel.Acpi.Fan.FanManager._load_thinkpad_acpi_module">[docs]</a>    <span class="k">def</span> <span class="nf">_load_thinkpad_acpi_module</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Load module thinkpad-acpi&quot;</span><span class="p">)</span>
-        <span class="n">rc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">&#39;/sbin/rmmod&#39;</span><span class="p">,</span> <span class="s">&#39;thinkpad-acpi&#39;</span><span class="p">])</span>
-        <span class="c"># if rc:</span>
-        <span class="c">#     raise NameError(&quot;Cannot unload thinkpad-acpi&quot;)</span>
-        <span class="n">rc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">&#39;/sbin/modprobe&#39;</span><span class="p">,</span> <span class="s">&#39;thinkpad-acpi&#39;</span><span class="p">,</span> <span class="s">&#39;fan_control=1&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">rc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s">&quot;Cannot load module thinkpad-acpi&quot;</span><span class="p">)</span>
+        <span class="c"># /!\ This code has side-effect on keyboard (AltGr)</span>
+
+        <span class="n">module</span> <span class="o">=</span> <span class="s">&#39;thinkpad-acpi&#39;</span>
+        <span class="k">if</span> <span class="n">is_module_loaded</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+            <span class="n">unload_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_module_loaded</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+            <span class="n">load_module</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;fan_control=1&#39;</span><span class="p">])</span>
 
     <span class="c">##############################################</span>
 </div>
@@ -142,6 +160,55 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__fan_file__</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;level &#39;</span> <span class="o">+</span> <span class="n">level</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">()</span>
+
+    <span class="c">##############################################</span>
+</div>
+<div class="viewcode-block" id="FanManager.calibrate"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/Fan.html#LaptopControlPanel.Acpi.Fan.FanManager.calibrate">[docs]</a>    <span class="k">def</span> <span class="nf">calibrate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">calibrate_thread</span> <span class="o">=</span> <span class="n">CalibrateThread</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">speeds</span> <span class="o">=</span> <span class="n">calibrate_thread</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">speeds</span>
+
+<span class="c">####################################################################################################</span>
+</div></div>
+<div class="viewcode-block" id="CalibrateThread"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/Fan.html#LaptopControlPanel.Acpi.Fan.CalibrateThread">[docs]</a><span class="k">class</span> <span class="nc">CalibrateThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+
+    <span class="n">_logger</span> <span class="o">=</span> <span class="n">_module_logger</span><span class="o">.</span><span class="n">getChild</span><span class="p">(</span><span class="s">&#39;CalibrateThread&#39;</span><span class="p">)</span>
+
+    <span class="c">##############################################</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fan_manager</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">CalibrateThread</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span> <span class="o">=</span> <span class="n">fan_manager</span>
+
+    <span class="c">###############################################</span>
+
+<div class="viewcode-block" id="CalibrateThread.run"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/Fan.html#LaptopControlPanel.Acpi.Fan.CalibrateThread.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">sleep_time</span> <span class="o">=</span> <span class="mi">10</span> <span class="c"># s</span>
+
+        <span class="n">current_level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span><span class="o">.</span><span class="n">level</span>
+        <span class="n">speeds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="s">&#39;full-speed&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
+            <span class="n">speed_t0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span><span class="o">.</span><span class="n">speed</span>
+            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">)</span>
+                <span class="n">speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span><span class="o">.</span><span class="n">speed</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Speed </span><span class="si">%u</span><span class="s"> rpm&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">speed</span><span class="p">))</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">speed_t0</span> <span class="o">-</span> <span class="n">speed</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">speed_t0</span> <span class="o">=</span> <span class="n">speed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Level </span><span class="si">%s</span><span class="s">: </span><span class="si">%u</span><span class="s"> rpm&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">level</span><span class="p">),</span> <span class="n">speed</span><span class="p">))</span>
+            <span class="n">speeds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fan_manager</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">current_level</span>
+
+        <span class="k">return</span> <span class="n">speeds</span>
 
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>

@@ -52,7 +52,20 @@
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>
 <span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
-<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># Copyright (C) 2014 Fabrice Salvaire</span>
+<span class="c">#</span>
+<span class="c"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU General Public License as published by</span>
+<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c"># (at your option) any later version.</span>
+<span class="c"># </span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c"># </span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c"># </span>
 <span class="c">####################################################################################################</span>
 
@@ -89,7 +102,8 @@
 
 <div class="viewcode-block" id="GpuPage._init_connection"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/GpuPage.html#LaptopControlPanel.GUI.Pages.GpuPage.GpuPage._init_connection">[docs]</a>    <span class="k">def</span> <span class="nf">_init_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_form</span><span class="o">.</span><span class="n">on_off_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_change_gpu_state</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">GpuManager</span><span class="o">.</span><span class="n">has_bbswitch</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_form</span><span class="o">.</span><span class="n">on_off_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_change_gpu_state</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
@@ -114,7 +128,10 @@
 </div>
 <div class="viewcode-block" id="GpuPage.refresh"><a class="viewcode-back" href="../../../../api/LaptopControlPanel/GUI/Pages/GpuPage.html#LaptopControlPanel.GUI.Pages.GpuPage.GpuPage.refresh">[docs]</a>    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_state</span> <span class="o">=</span> <span class="n">GpuManager</span><span class="o">.</span><span class="n">state</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">GpuManager</span><span class="o">.</span><span class="n">has_bbswitch</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_state</span> <span class="o">=</span> <span class="n">GpuManager</span><span class="o">.</span><span class="n">state</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_state</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_on_off_label</span><span class="p">()</span>
 
 <span class="c">####################################################################################################</span>

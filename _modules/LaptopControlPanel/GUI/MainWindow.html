@@ -54,7 +54,20 @@
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>
 <span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
-<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># Copyright (C) 2014 Fabrice Salvaire</span>
+<span class="c">#</span>
+<span class="c"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU General Public License as published by</span>
+<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c"># (at your option) any later version.</span>
+<span class="c"># </span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c"># </span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c"># </span>
 <span class="c">####################################################################################################</span>
 
@@ -77,6 +90,7 @@
 
         <span class="nb">super</span><span class="p">(</span><span class="n">MainWindow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;LaptopControlPanel&#39;</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_action</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_init_ui</span><span class="p">()</span>
 
     <span class="c">##############################################</span>
@@ -87,16 +101,33 @@
 
     <span class="c">##############################################</span>
 </div>
+<div class="viewcode-block" id="MainWindow._init_action"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow._init_action">[docs]</a>    <span class="k">def</span> <span class="nf">_init_action</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_action</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QAction</span><span class="p">(</span><span class="s">&quot;&amp;Refresh&quot;</span><span class="p">,</span>
+                                             <span class="bp">self</span><span class="p">,</span>
+                                             <span class="n">triggered</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">,</span>
+                                             <span class="n">shortcut</span><span class="o">=</span><span class="s">&#39;Ctrl-R&#39;</span><span class="p">,</span>
+                                             <span class="n">shortcutContext</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ApplicationShortcut</span><span class="p">,</span>
+                                             <span class="p">)</span>
+
+    <span class="c">##############################################</span>
+</div>
 <div class="viewcode-block" id="MainWindow._init_ui"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow._init_ui">[docs]</a>    <span class="k">def</span> <span class="nf">_init_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">statusBar</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_bar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addToolBar</span><span class="p">(</span><span class="s">&#39;Tools&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_bar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_refresh_action</span><span class="p">)</span>
 
         <span class="n">central_widget</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
         <span class="n">horizontal_Layout</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QListWidget</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="o">.</span><span class="n">setMaximumSize</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">16777215</span><span class="p">))</span>
+        <span class="n">size_policy</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QSizePolicy</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Minimum</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="o">.</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">size_policy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="o">.</span><span class="n">setMinimumSize</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="o">.</span><span class="n">setTextElideMode</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ElideNone</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stacked_widget</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QStackedWidget</span><span class="p">(</span><span class="n">central_widget</span><span class="p">)</span>
 
@@ -120,7 +151,7 @@
         <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list_widget</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stacked_widget</span><span class="p">:</span>
             <span class="n">horizontal_Layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_application</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_refresh</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_application</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_translate_ui</span><span class="p">()</span>
 
@@ -149,7 +180,7 @@
 
     <span class="c">##############################################</span>
 </div>
-<div class="viewcode-block" id="MainWindow._refresh"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow._refresh">[docs]</a>    <span class="k">def</span> <span class="nf">_refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MainWindow.refresh"><a class="viewcode-back" href="../../../api/LaptopControlPanel/GUI/MainWindow.html#LaptopControlPanel.GUI.MainWindow.MainWindow.refresh">[docs]</a>    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stacked_widget</span><span class="o">.</span><span class="n">currentWidget</span><span class="p">()</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
 

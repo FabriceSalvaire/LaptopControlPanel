@@ -52,7 +52,20 @@
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>
 <span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
-<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># Copyright (C) 2014 Fabrice Salvaire</span>
+<span class="c">#</span>
+<span class="c"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU General Public License as published by</span>
+<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c"># (at your option) any later version.</span>
+<span class="c"># </span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c"># </span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c"># </span>
 <span class="c">####################################################################################################</span>
 
@@ -85,22 +98,22 @@
 
     <span class="c">##############################################</span>
 </div>
-<div class="viewcode-block" id="SysDevice._read"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/SysDevice.html#LaptopControlPanel.System.SysDevice.SysDevice._read">[docs]</a>    <span class="k">def</span> <span class="nf">_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="SysDevice.read"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/SysDevice.html#LaptopControlPanel.System.SysDevice.SysDevice.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_join</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
     <span class="c">##############################################</span>
 </div>
-<div class="viewcode-block" id="SysDevice._read_int"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/SysDevice.html#LaptopControlPanel.System.SysDevice.SysDevice._read_int">[docs]</a>    <span class="k">def</span> <span class="nf">_read_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="SysDevice.read_int"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/SysDevice.html#LaptopControlPanel.System.SysDevice.SysDevice.read_int">[docs]</a>    <span class="k">def</span> <span class="nf">read_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
 
     <span class="c">##############################################</span>
 </div>
-<div class="viewcode-block" id="SysDevice._read_bool"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/SysDevice.html#LaptopControlPanel.System.SysDevice.SysDevice._read_bool">[docs]</a>    <span class="k">def</span> <span class="nf">_read_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="SysDevice.read_bool"><a class="viewcode-back" href="../../../api/LaptopControlPanel/System/SysDevice.html#LaptopControlPanel.System.SysDevice.SysDevice.read_bool">[docs]</a>    <span class="k">def</span> <span class="nf">read_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_int</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">read_int</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
 
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>

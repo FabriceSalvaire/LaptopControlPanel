@@ -52,7 +52,20 @@
 <span class="c">####################################################################################################</span>
 <span class="c"># </span>
 <span class="c"># LaptopControlPanel - A Laptop Control Panel</span>
-<span class="c"># Copyright (C) 2013 Fabrice Salvaire</span>
+<span class="c"># Copyright (C) 2014 Fabrice Salvaire</span>
+<span class="c">#</span>
+<span class="c"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU General Public License as published by</span>
+<span class="c"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c"># (at your option) any later version.</span>
+<span class="c"># </span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+<span class="c"># </span>
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c"># </span>
 <span class="c">####################################################################################################</span>
 
@@ -60,11 +73,11 @@
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
 
 <span class="c">####################################################################################################</span>
 
 <span class="kn">from</span> <span class="nn">LaptopControlPanel.Tools.DictTools</span> <span class="kn">import</span> <span class="n">DictInitialised</span>
+<span class="kn">from</span> <span class="nn">LaptopControlPanel.Kernel.Module</span> <span class="kn">import</span> <span class="n">is_module_loaded</span><span class="p">,</span> <span class="n">load_module</span>
 
 <span class="c">####################################################################################################</span>
 
@@ -97,12 +110,9 @@
 </div>
 <div class="viewcode-block" id="AcpiCallDevice._load_acpi_call_module"><a class="viewcode-back" href="../../../api/LaptopControlPanel/Acpi/AcpiCall.html#LaptopControlPanel.Acpi.AcpiCall.AcpiCallDevice._load_acpi_call_module">[docs]</a>    <span class="k">def</span> <span class="nf">_load_acpi_call_module</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="c"># kernel_version = subprocess.check_outpout([&#39;/bin/uname&#39;, &#39;-r&#39;])</span>
-        <span class="c"># module_path = os.path.join(&#39;lib&#39;, &#39;modules&#39;, kernel_version, &#39;extra&#39;, &#39;acpi_call.ko&#39;)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Load module acpi_call&quot;</span><span class="p">)</span>
-        <span class="n">rc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">&#39;/sbin/modprobe&#39;</span><span class="p">,</span> <span class="s">&#39;acpi_call&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">rc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s">&quot;Cannot load module acpi_call&quot;</span><span class="p">)</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="s">&#39;acpi_call&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_module_loaded</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+            <span class="n">load_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
 
     <span class="c">##############################################</span>
 </div>
