@@ -17,11 +17,8 @@ Written by `Fabrice Salvaire <http://fabrice-salvaire.pagesperso-orange.fr>`_.
 
 -----
 
-.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot1.png
-  :scale: 50%
-
-.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot2.png
-  :scale: 50%
+.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot1-scaled.png
+.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot2-scaled.png
 
 .. include:: introduction.txt
 
