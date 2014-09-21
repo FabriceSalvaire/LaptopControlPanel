@@ -1,0 +1,42 @@
+.. -*- Mode: rst -*-
+
+..
+   |LaptopControlPanelUrl|
+   |LaptopControlPanelHomePage|_
+   |LaptopControlPanelDoc|_
+   |LaptopControlPanel@github|_
+   |LaptopControlPanel@readthedocs|_
+   |LaptopControlPanel@readthedocs-badge|
+   |LaptopControlPanel@pypi|_
+
+.. |ohloh| image:: https://www.openhub.net/accounts/230426/widgets/account_tiny.gif
+   :target: https://www.openhub.net/accounts/fabricesalvaire
+   :alt: Fabrice Salvaire's Ohloh profile
+   :height: 15px
+   :width:  80px
+
+.. |LaptopControlPanelUrl| replace:: http://fabricesalvaire.github.io/LaptopControlPanel
+
+.. |LaptopControlPanelHomePage| replace:: LaptopControlPanel Home Page
+.. _LaptopControlPanelHomePage: http://fabricesalvaire.github.io/LaptopControlPanel
+
+.. |LaptopControlPanelDoc| replace:: LaptopControlPanel Documentation
+.. _LaptopControlPanelDoc: http://pydvi.readthedocs.org/en/latest
+
+.. |LaptopControlPanel@readthedocs-badge| image:: https://readthedocs.org/projects/pydvi/badge/?version=latest
+   :target: http://pydvi.readthedocs.org/en/latest
+
+.. |LaptopControlPanel@github| replace:: https://github.com/FabriceSalvaire/LaptopControlPanel
+.. .. _LaptopControlPanel@github: https://github.com/FabriceSalvaire/LaptopControlPanel
+
+.. |LaptopControlPanel@readthedocs| replace:: http://pydvi.readthedocs.org
+.. .. _LaptopControlPanel@readthedocs: http://pydvi.readthedocs.org
+
+.. |LaptopControlPanel@pypi| replace:: https://pypi.python.org/pypi/LaptopControlPanel
+.. .. _LaptopControlPanel@pypi: https://pypi.python.org/pypi/LaptopControlPanel
+
+.. |Build Status| image:: https://travis-ci.org/FabriceSalvaire/LaptopControlPanel.svg?branch=master
+   :target: https://travis-ci.org/FabriceSalvaire/LaptopControlPanel
+   :alt: LaptopControlPanel build status @travis-ci.org
+
+.. End

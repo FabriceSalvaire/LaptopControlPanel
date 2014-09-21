@@ -1,0 +1,12 @@
+.. -*- Mode: rst -*-
+
+.. |Python| replace:: Python
+.. _Python: http://python.org
+
+.. |PyPI| replace:: PyPI
+.. _PyPI: https://pypi.python.org/pypi
+
+.. |Sphinx| replace:: Sphinx
+.. _Sphinx: http://sphinx-doc.org
+
+.. End

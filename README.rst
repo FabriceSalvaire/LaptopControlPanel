@@ -1,15 +1,92 @@
-=========================
-LaptopControlPanel V0.1.0
-=========================
+.. -*- Mode: rst -*-
 
-:Info: The home page of LaptopControlPanel is located at http://fabricesalvaire.github.com/LaptopControlPanel
+.. -*- Mode: rst -*-
 
-About
+..
+   |LaptopControlPanelUrl|
+   |LaptopControlPanelHomePage|_
+   |LaptopControlPanelDoc|_
+   |LaptopControlPanel@github|_
+   |LaptopControlPanel@readthedocs|_
+   |LaptopControlPanel@readthedocs-badge|
+   |LaptopControlPanel@pypi|_
+
+.. |ohloh| image:: https://www.openhub.net/accounts/230426/widgets/account_tiny.gif
+   :target: https://www.openhub.net/accounts/fabricesalvaire
+   :alt: Fabrice Salvaire's Ohloh profile
+   :height: 15px
+   :width:  80px
+
+.. |LaptopControlPanelUrl| replace:: http://fabricesalvaire.github.io/LaptopControlPanel
+
+.. |LaptopControlPanelHomePage| replace:: LaptopControlPanel Home Page
+.. _LaptopControlPanelHomePage: http://fabricesalvaire.github.io/LaptopControlPanel
+
+.. |LaptopControlPanelDoc| replace:: LaptopControlPanel Documentation
+.. _LaptopControlPanelDoc: http://pydvi.readthedocs.org/en/latest
+
+.. |LaptopControlPanel@readthedocs-badge| image:: https://readthedocs.org/projects/pydvi/badge/?version=latest
+   :target: http://pydvi.readthedocs.org/en/latest
+
+.. |LaptopControlPanel@github| replace:: https://github.com/FabriceSalvaire/LaptopControlPanel
+.. .. _LaptopControlPanel@github: https://github.com/FabriceSalvaire/LaptopControlPanel
+
+.. |LaptopControlPanel@readthedocs| replace:: http://pydvi.readthedocs.org
+.. .. _LaptopControlPanel@readthedocs: http://pydvi.readthedocs.org
+
+.. |LaptopControlPanel@pypi| replace:: https://pypi.python.org/pypi/LaptopControlPanel
+.. .. _LaptopControlPanel@pypi: https://pypi.python.org/pypi/LaptopControlPanel
+
+.. |Build Status| image:: https://travis-ci.org/FabriceSalvaire/LaptopControlPanel.svg?branch=master
+   :target: https://travis-ci.org/FabriceSalvaire/LaptopControlPanel
+   :alt: LaptopControlPanel build status @travis-ci.org
+
+.. End
+.. -*- Mode: rst -*-
+
+.. |Python| replace:: Python
+.. _Python: http://python.org
+
+.. |PyPI| replace:: PyPI
+.. _PyPI: https://pypi.python.org/pypi
+
+.. |Sphinx| replace:: Sphinx
+.. _Sphinx: http://sphinx-doc.org
+
+.. End
+
+====================
+ LaptopControlPanel
+====================
+
+The official LaptopControlPanel Home Page is located at |LaptopControlPanelUrl|
+
+The latest documentation build from the git repository is available at readthedocs.org |LaptopControlPanel@readthedocs-badge|
+
+Written by `Fabrice Salvaire <http://fabrice-salvaire.pagesperso-orange.fr>`_.
+
+|Build Status|
+
 -----
+
+.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot1.png
+  :scale: 50%
+
+.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot2.png
+  :scale: 50%
+
+.. -*- Mode: rst -*-
+
+
+==============
+ Introduction
+==============
 
 LaptopControlPanel is a Python module that provides a Graphical Control Panel for Lenovo Thinkpad
 Laptop and a console tool to monitor and manage the battery. Such functions are not provided by
 standard control panels like those of the KDE desktop.
+
+The source code is licensed under GPL V3.
 
 .. warning::
   This Python module uses ACPI calls and low level hardware functions. A miss use of these tools can
@@ -44,41 +121,55 @@ base is ``\_SB.PCI0.LPC.EC.HKEY``). ACPI is an abstraction layer to set and get 
 computer busses. The (`acpi_call <https://github.com/mkottman/acpi_call>`_) module, which is not
 included in the kernel, is required to perform these calls. This module must be used carefully.
 
-Source Repository
------------------
+.. End
 
-The source code is licensed under GPL V3 and is available on `GitHub
-<https://github.com/FabriceSalvaire/LaptopControlPanel>`_.  Also a Python package is available on
-`PyPI <http://pypi.python.org/pypi/LaptopControlPanel>`_.
+.. -*- Mode: rst -*-
 
-Requirements
+.. _installation-page:
+
+
+==============
+ Installation
+==============
+
+Dependencies
 ------------
 
-* Python 2.7
-* PyQt 4.9
-* `acpi_call <https://github.com/mkottman/acpi_call>`_
+LaptopControlPanel requires the following dependencies:
 
-Building
---------
+ * Python 2.7
+ * PyQt 4.9
+ * `acpi_call <https://github.com/mkottman/acpi_call>`_
 
-Download and unpack the source, then run the following commands in a terminal::
+Installation from PyPi Repository
+---------------------------------
+
+LaptopControlPanel is made available on the |Pypi|_ repository at |LaptopControlPanel@pypi|
+
+Run this command to install the last release:
+
+.. code-block:: sh
+
+  pip install LaptopControlPanel
+
+Installation from Source
+------------------------
+
+The LaptopControlPanel source code is hosted at |LaptopControlPanel@github|
+
+To clone the Git repository, run this command in a terminal:
+
+.. code-block:: sh
+
+  git clone git@github.com:FabriceSalvaire/LaptopControlPanel.git
+
+Then to build and install LaptopControlPanel run these commands:
+
+.. code-block:: sh
 
   python setup.py build
+  python setup.py install
 
-Running
--------
-
-.. important::
-  Actually LaptopControlPanel needs root privileges so as to read and write **/proc** entries.
-
-The *acpi_call* module must be loaded in order to manage the battery.
-
-Set the terminal environment using::
-
-  source setenv.sh
-
-then run the command::
-
-  bin/laptop-control-panel
+.. End
 
 .. End

@@ -1,41 +1,51 @@
-.. commented
-    ==========
-     Overview
-    ==========
+.. include:: project-links.txt
 
-.. include:: /common.txt
+.. hack to move down the next note block
+.. raw:: html
 
-.. include:: /meta.txt
+   <br/>
 
-.. meta::
-   :keywords: laptop control panel
-   :description: LaptopControlPanel is a Python module that provides a Graphical Control Panel for
-     Lenovo Thinkpad Laptop and a console tool to monitor and manage the battery. Such functions are
-     not provided by standard control panels like those of the KDE desktop.
+Welcome to the LaptopControlPanel documentation!
 
-.. commented
-    .. itemscope:: SoftwareApplication
-        :tag: p
-      
-        :itemprop:`LaptopControlPanel <name>` is a Python module that provides
+.. note:: The official Home Page of LaptopControlPanel is located at |LaptopControlPanelUrl|
 
-===================
- Table of Contents
-===================
+    If you are at http://readthedocs.org then you are reading the so called *latest documentation*.
+
+    The *latest documentation* |LaptopControlPanel@readthedocs-badge| is automatically built from the
+    git repository after each commit.
+
+    As opposite the |LaptopControlPanelHomePage|_ is built manually and is thus less prone to errors.
+
+.. include:: introduction.txt
+
+==============
+ Installation
+==============
+
+The procedure to install LaptopControlPanel is described in the :ref:`Installation Manual <installation-page>`.
+
+=========
+ Testing
+=========
+
+See the :ref:`testing section <testing-page>`.
+
+===============
+ Documentation
+===============
+
+ * :ref:`LaptopControlPanel Reference Manual <reference-manual-page>`
+
+==========
+ Overview
+==========
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 3
   :numbered:
 
-  README.rst
-  api/LaptopControlPanel.rst
-
-=========
- Indexes
-=========
-
-  * :ref:`genindex`
-  * :ref:`modindex`
-  * :ref:`search`
+  installation.rst
+  testing.rst
+  reference-manual.rst
 
 .. End
