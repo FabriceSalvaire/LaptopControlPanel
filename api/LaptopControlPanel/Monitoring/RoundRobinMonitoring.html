@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.1.8.3. RoundRobinMonitoring &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="3.1.8. Monitoring" href="../Monitoring.html" />
+    <link rel="next" title="3.1.9. System" href="../System.html" />
+    <link rel="prev" title="3.1.8.2. BatteryStatusDataBase" href="BatteryStatusDataBase.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../System.html" title="3.1.9. System"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="BatteryStatusDataBase.html" title="3.1.8.2. BatteryStatusDataBase"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../reference-manual.html" >3. API Documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >3.1. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Monitoring.html" accesskey="U">3.1.8. <tt class="docutils literal"><span class="pre">Monitoring</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-LaptopControlPanel.Monitoring.RoundRobinMonitoring">
+<span id="roundrobinmonitoring"></span><h1>3.1.8.3. <tt class="xref py py-mod docutils literal"><span class="pre">RoundRobinMonitoring</span></tt><a class="headerlink" href="#module-LaptopControlPanel.Monitoring.RoundRobinMonitoring" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.DataProvider">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Monitoring.RoundRobinMonitoring.</tt><tt class="descname">DataProvider</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#DataProvider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.DataProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.DataProvider.dtype">
+<tt class="descname">dtype</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#DataProvider.dtype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.DataProvider.dtype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring">
+<em class="property">class </em><tt class="descclassname">LaptopControlPanel.Monitoring.RoundRobinMonitoring.</tt><tt class="descname">RoundRobinMonitoring</tt><big>(</big><em>time_resolution</em>, <em>time_period</em>, <em>data_providers</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../Tools/SleepThread.html#LaptopControlPanel.Tools.SleepThread.SleepThread" title="LaptopControlPanel.Tools.SleepThread.SleepThread"><tt class="xref py py-class docutils literal"><span class="pre">LaptopControlPanel.Tools.SleepThread.SleepThread</span></tt></a></p>
+<dl class="method">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring._init_date_frame">
+<tt class="descname">_init_date_frame</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring._init_date_frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring._init_date_frame" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring._logger">
+<tt class="descname">_logger</tt><em class="property"> = &lt;logging.Logger object at 0x4e73f90&gt;</em><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring._logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.field">
+<tt class="descname">field</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring.field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.last_time">
+<tt class="descname">last_time</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring.last_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.last_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.period">
+<tt class="descname">period</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring.period"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.period" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.time_resolution">
+<tt class="descname">time_resolution</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring.time_resolution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.time_resolution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.time_slot">
+<tt class="descname">time_slot</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring.time_slot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.time_slot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.times">
+<tt class="descname">times</tt><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring.times"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.times" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.work">
+<tt class="descname">work</tt><big>(</big><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/RoundRobinMonitoring.html#RoundRobinMonitoring.work"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.RoundRobinMonitoring.RoundRobinMonitoring.work" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="BatteryStatusDataBase.html"
+                        title="previous chapter">3.1.8.2. <tt class="docutils literal"><span class="pre">BatteryStatusDataBase</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../System.html"
+                        title="next chapter">3.1.9. <tt class="docutils literal"><span class="pre">System</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/api/LaptopControlPanel/Monitoring/RoundRobinMonitoring.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../System.html" title="3.1.9. System"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="BatteryStatusDataBase.html" title="3.1.8.2. BatteryStatusDataBase"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../reference-manual.html" >3. API Documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >3.1. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Monitoring.html" >3.1.8. <tt class="docutils literal"><span class="pre">Monitoring</span></tt></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Fabrice Salvaire.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

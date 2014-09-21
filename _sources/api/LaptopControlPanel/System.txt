@@ -3,6 +3,7 @@
 ***************
 
 .. toctree::
+  System/CoreTemperature
   System/Hdd
   System/NetworkDevice
   System/PowerSource

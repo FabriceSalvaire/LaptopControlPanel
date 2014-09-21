@@ -1,0 +1,9 @@
+****************************
+ :mod:`main_window_test_ui`
+****************************
+
+.. automodule:: LaptopControlPanel.GUI.Pages.ui.main_window_test_ui
+   :members:
+   :show-inheritance:
+
+.. End

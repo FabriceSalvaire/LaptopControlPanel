@@ -2,7 +2,7 @@
 LaptopControlPanel V0.1.0
 =========================
 
-.. :Info: The home page of LaptopControlPanel is located at http://fabricesalvaire.github.com/LaptopControlPanel
+:Info: The home page of LaptopControlPanel is located at http://fabricesalvaire.github.com/LaptopControlPanel
 
 About
 -----

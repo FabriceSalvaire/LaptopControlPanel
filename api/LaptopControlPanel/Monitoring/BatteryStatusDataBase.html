@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.7.2. BatteryStatusDataBase &mdash; LaptopControlPanel 0.1.0 documentation</title>
+    <title>3.1.8.2. BatteryStatusDataBase &mdash; LaptopControlPanel 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../../static/LaptopControlPanel.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
     <link rel="top" title="LaptopControlPanel 0.1.0 documentation" href="../../../index.html" />
-    <link rel="up" title="2.7. Monitoring" href="../Monitoring.html" />
-    <link rel="next" title="2.8. System" href="../System.html" />
-    <link rel="prev" title="2.7.1. BatteryMonitoring" href="BatteryMonitoring.html" /> 
+    <link rel="up" title="3.1.8. Monitoring" href="../Monitoring.html" />
+    <link rel="next" title="3.1.8.3. RoundRobinMonitoring" href="RoundRobinMonitoring.html" />
+    <link rel="prev" title="3.1.8.1. BatteryMonitoring" href="BatteryMonitoring.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,14 +41,15 @@
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../System.html" title="2.8. System"
+          <a href="RoundRobinMonitoring.html" title="3.1.8.3. RoundRobinMonitoring"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="BatteryMonitoring.html" title="2.7.1. BatteryMonitoring"
+          <a href="BatteryMonitoring.html" title="3.1.8.1. BatteryMonitoring"
              accesskey="P">previous</a> |</li>
         <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
-          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
-          <li><a href="../Monitoring.html" accesskey="U">2.7. <tt class="docutils literal"><span class="pre">Monitoring</span></tt></a> &raquo;</li> 
+          <li><a href="../../../reference-manual.html" >3. API Documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >3.1. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Monitoring.html" accesskey="U">3.1.8. <tt class="docutils literal"><span class="pre">Monitoring</span></tt></a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,7 +59,7 @@
           <div class="body">
             
   <div class="section" id="module-LaptopControlPanel.Monitoring.BatteryStatusDataBase">
-<span id="batterystatusdatabase"></span><h1>2.7.2. <tt class="xref py py-mod docutils literal"><span class="pre">BatteryStatusDataBase</span></tt><a class="headerlink" href="#module-LaptopControlPanel.Monitoring.BatteryStatusDataBase" title="Permalink to this headline">¶</a></h1>
+<span id="batterystatusdatabase"></span><h1>3.1.8.2. <tt class="xref py py-mod docutils literal"><span class="pre">BatteryStatusDataBase</span></tt><a class="headerlink" href="#module-LaptopControlPanel.Monitoring.BatteryStatusDataBase" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusDataBase">
 <em class="property">class </em><tt class="descclassname">LaptopControlPanel.Monitoring.BatteryStatusDataBase.</tt><tt class="descname">BatteryStatusDataBase</tt><big>(</big><em>filename</em>, <em>echo=False</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/BatteryStatusDataBase.html#BatteryStatusDataBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusDataBase" title="Permalink to this definition">¶</a></dt>
@@ -68,7 +69,7 @@
 <dl class="class">
 <dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow">
 <em class="property">class </em><tt class="descclassname">LaptopControlPanel.Monitoring.BatteryStatusDataBase.</tt><tt class="descname">BatteryStatusRow</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../../../_modules/LaptopControlPanel/Monitoring/BatteryStatusDataBase.html#BatteryStatusRow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.Base</span></tt>, <a class="reference internal" href="../DataBase/SqlAlchemyBase.html#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow" title="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow"><tt class="xref py py-class docutils literal"><span class="pre">LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.api.Base</span></tt>, <a class="reference internal" href="../DataBase/SqlAlchemyBase.html#LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow" title="LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow"><tt class="xref py py-class docutils literal"><span class="pre">LaptopControlPanel.DataBase.SqlAlchemyBase.SqlRow</span></tt></a></p>
 <p>A simple constructor that allows initialization from kwargs.</p>
 <p>Sets attributes on the constructed instance using the names and
 values in <tt class="docutils literal"><span class="pre">kwargs</span></tt>.</p>
@@ -77,7 +78,7 @@ attributes of the instance&#8217;s class are allowed. These could be,
 for example, any mapped columns or relationships.</p>
 <dl class="attribute">
 <dt id="LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow._sa_class_manager">
-<tt class="descname">_sa_class_manager</tt><em class="property"> = &lt;ClassManager of &lt;class 'LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow'&gt; at 59cc320&gt;</em><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow._sa_class_manager" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_sa_class_manager</tt><em class="property"> = &lt;ClassManager of &lt;class 'LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow'&gt; at 5808990&gt;</em><a class="headerlink" href="#LaptopControlPanel.Monitoring.BatteryStatusDataBase.BatteryStatusRow._sa_class_manager" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -144,10 +145,10 @@ for example, any mapped columns or relationships.</p>
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="BatteryMonitoring.html"
-                        title="previous chapter">2.7.1. <tt class="docutils literal"><span class="pre">BatteryMonitoring</span></tt></a></p>
+                        title="previous chapter">3.1.8.1. <tt class="docutils literal"><span class="pre">BatteryMonitoring</span></tt></a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../System.html"
-                        title="next chapter">2.8. <tt class="docutils literal"><span class="pre">System</span></tt></a></p>
+  <p class="topless"><a href="RoundRobinMonitoring.html"
+                        title="next chapter">3.1.8.3. <tt class="docutils literal"><span class="pre">RoundRobinMonitoring</span></tt></a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../../_sources/api/LaptopControlPanel/Monitoring/BatteryStatusDataBase.txt"
@@ -180,14 +181,15 @@ for example, any mapped columns or relationships.</p>
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../System.html" title="2.8. System"
+          <a href="RoundRobinMonitoring.html" title="3.1.8.3. RoundRobinMonitoring"
              >next</a> |</li>
         <li class="right" >
-          <a href="BatteryMonitoring.html" title="2.7.1. BatteryMonitoring"
+          <a href="BatteryMonitoring.html" title="3.1.8.1. BatteryMonitoring"
              >previous</a> |</li>
         <li><a href="../../../index.html">LaptopControlPanel 0.1.0 documentation</a> &raquo;</li>
-          <li><a href="../../LaptopControlPanel.html" >2. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
-          <li><a href="../Monitoring.html" >2.7. <tt class="docutils literal"><span class="pre">Monitoring</span></tt></a> &raquo;</li> 
+          <li><a href="../../../reference-manual.html" >3. API Documentation</a> &raquo;</li>
+          <li><a href="../../LaptopControlPanel.html" >3.1. <tt class="docutils literal"><span class="pre">LaptopControlPanel</span></tt></a> &raquo;</li>
+          <li><a href="../Monitoring.html" >3.1.8. <tt class="docutils literal"><span class="pre">Monitoring</span></tt></a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
