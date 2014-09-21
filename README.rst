@@ -23,16 +23,16 @@
 .. _LaptopControlPanelHomePage: http://fabricesalvaire.github.io/LaptopControlPanel
 
 .. |LaptopControlPanelDoc| replace:: LaptopControlPanel Documentation
-.. _LaptopControlPanelDoc: http://pydvi.readthedocs.org/en/latest
+.. _LaptopControlPanelDoc: http://laptopcontrolpanel.readthedocs.org/en/latest
 
-.. |LaptopControlPanel@readthedocs-badge| image:: https://readthedocs.org/projects/pydvi/badge/?version=latest
-   :target: http://pydvi.readthedocs.org/en/latest
+.. |LaptopControlPanel@readthedocs-badge| image:: https://readthedocs.org/projects/laptopcontrolpanel/badge/?version=latest
+   :target: http://laptopcontrolpanel.readthedocs.org/en/latest
 
 .. |LaptopControlPanel@github| replace:: https://github.com/FabriceSalvaire/LaptopControlPanel
 .. .. _LaptopControlPanel@github: https://github.com/FabriceSalvaire/LaptopControlPanel
 
-.. |LaptopControlPanel@readthedocs| replace:: http://pydvi.readthedocs.org
-.. .. _LaptopControlPanel@readthedocs: http://pydvi.readthedocs.org
+.. |LaptopControlPanel@readthedocs| replace:: http://laptopcontrolpanel.readthedocs.org
+.. .. _LaptopControlPanel@readthedocs: http://laptopcontrolpanel.readthedocs.org
 
 .. |LaptopControlPanel@pypi| replace:: https://pypi.python.org/pypi/LaptopControlPanel
 .. .. _LaptopControlPanel@pypi: https://pypi.python.org/pypi/LaptopControlPanel
@@ -69,11 +69,8 @@ Written by `Fabrice Salvaire <http://fabrice-salvaire.pagesperso-orange.fr>`_.
 
 -----
 
-.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot1.png
-  :scale: 50%
-
-.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot2.png
-  :scale: 50%
+.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot1-scaled.png
+.. image:: https://raw.github.com/FabriceSalvaire/LaptopControlPanel/master/doc/sphinx/source/images/screenshot2-scaled.png
 
 .. -*- Mode: rst -*-
 
