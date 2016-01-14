@@ -10,6 +10,8 @@ LaptopControlPanel is a Python module that provides a Graphical Control Panel fo
 Laptop and a console tool to monitor and manage the battery. Such functions are not provided by
 standard control panels like those of the KDE desktop.
 
+It was used on a Lenovo Thinkpad T430 model. The ACPI calls could not work on more recent models.
+
 The source code is licensed under GPL V3.
 
 .. warning::
