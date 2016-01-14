@@ -158,7 +158,6 @@ class GuiApplicationBase(ApplicationBase, QtGui.QApplication):
 
     def about(self):
 
-        a = 1 / 0
         message = Messages.about % {'version':str(Version.software_version)}
         QtGui.QMessageBox.about(self.main_window, 'About LaptopControlPanel', message)
 

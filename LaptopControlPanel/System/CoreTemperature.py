@@ -22,6 +22,10 @@
 
 ####################################################################################################
 
+import os
+
+####################################################################################################
+
 from .SysDevice import SysDevice
 from LaptopControlPanel.Kernel.Module import is_module_loaded, load_module
 
@@ -29,13 +33,19 @@ from LaptopControlPanel.Kernel.Module import is_module_loaded, load_module
 
 class CoreTemperature(SysDevice):
 
-    __path__ = '/sys/devices/platform/coretemp.0/hwmon/hwmon2'
+    __path__ = '/sys/devices/platform/coretemp.0/hwmon/hwmon{}'
 
     ##############################################
 
     def __init__(self):
 
-        super(CoreTemperature, self).__init__(self.__path__)
+        path = None
+        for i in xrange(32):
+            path = self.__path__.format(i)
+            if os.path.exists(path):
+                break
+        
+        super(CoreTemperature, self).__init__(path)
         self._load_coretemp_module()
 
     ##############################################

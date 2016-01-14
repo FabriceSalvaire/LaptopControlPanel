@@ -6,7 +6,8 @@
 #include <linux/proc_fs.h>
 #include <linux/slab.h>
 #include <asm/uaccess.h>
-#include <acpi/acpi.h>
+//#include <acpi/acpi.h>
+#include <linux/acpi.h>
 
 MODULE_LICENSE("GPL");
 

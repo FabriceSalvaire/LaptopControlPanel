@@ -200,8 +200,10 @@ class FanPage(PageBase):
         if self._monitoring is not None:
             self._logger.info("Refresh plot")
 
+            self._axes_left.clear()
+            self._axes_right.clear() # clear left!
+
             axes = self._axes_left
-            axes.clear()        
             axes.grid(True)
             times = self._monitoring.times
             axes.set_xlabel('Times')
@@ -214,14 +216,11 @@ class FanPage(PageBase):
 
             data_provider_name = 'CPU Temperature'
             axes = self._axes_right
-            axes.clear()        
             axes.set_ylabel(data_provider_name)
             axes.set_ylim(0, 100)
             axes.plot(times, self._monitoring.field(data_provider_name), 'blue')
 
             data_provider_name = 'HDD Temperature'
-            # axes = self._axes_right
-            # axes.clear()        
             # axes.set_ylabel(data_provider_name)
             # axes.set_ylim(0, 60)
             axes.plot(times, self._monitoring.field(data_provider_name), 'red')
