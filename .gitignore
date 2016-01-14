@@ -1,0 +1,8 @@
+.bzr
+.bzrignore
+*~
+*pyc
+*_ui.py
+LaptopControlPanel/Version.py
+build
+not-yet-included
