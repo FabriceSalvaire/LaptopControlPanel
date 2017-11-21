@@ -55,6 +55,8 @@
 
 .. End
 
+**Unused and no longer maintained**
+
 ====================
  LaptopControlPanel
 ====================
